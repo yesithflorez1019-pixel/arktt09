@@ -6,8 +6,9 @@ import Inicio from './pages/Inicio';
 import Noticias from './pages/Noticias';
 import DetalleNoticia from './pages/DetalleNoticia';
 import Admisiones from './pages/Admisiones';
-import Galeria from './pages/Galeria'; // <--- 1. IMPORTAMOS LA GALERÍA
+import Galeria from './pages/Galeria'; 
 import { noticiasData } from './data/noticias';
+import Calendario from './pages/Calendario';
 
 export default function App() {
   const [paginaActual, setPaginaActual] = useState('inicio');
@@ -35,7 +36,7 @@ export default function App() {
         {paginaActual === 'noticias' && <Noticias verDetalle={verDetalleNoticia} />}
         {paginaActual === 'admisiones' && <Admisiones navegarA={navegarA} />}
         {paginaActual === 'galeria' && <Galeria navegarA={navegarA} />}
-
+        {paginaActual === 'calendario' && <Calendario navegarA={navegarA} />}
         {paginaActual === 'detalle-noticia' && (
           <DetalleNoticia 
             noticia={noticiasData.find(n => n.id === noticiaSeleccionadaId)}

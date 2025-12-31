@@ -10,7 +10,7 @@ const galeriaEventos = [
     id: 1,
     titulo: "Navidad 2025",
     fecha: "25 Diciembre 2025",
-    descripcion: "Un dia hermoso que en nuestra navidad nos visito Papa noel.",
+    descripcion: "Un dia hermoso que en nuestra navidad nos visito Papá Noel.",
     portada: "/fotos-galeria/1.jpeg",
     fotos: [
      "/fotos-galeria/3.jpeg",

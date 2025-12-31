@@ -24,7 +24,7 @@ export default function TopBar() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors"
           >
-            <MapPin size={14} className="text-cyan-400" /> Dg. 62 # 45-118, Barrancabermeja
+            <MapPin size={14} className="text-cyan-400" /> Dg. 62 # 45-30, Barrancabermeja
           </a>
           <span className="text-slate-600">|</span>
           <a 
@@ -33,7 +33,7 @@ export default function TopBar() {
             rel="noopener noreferrer"
             className="hover:text-cyan-400 font-bold"
           >
-            Plataforma Docente
+            Plataforma Integra
           </a>
         </div>
       </div>

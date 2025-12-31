@@ -5,15 +5,14 @@ export const noticiasData = [
     {
       id: 1,
       fecha: "15 DIC",
-      titulo: "Apertura de Matrículas 2025",
+      titulo: "Apertura de Matrículas 2026",
       resumen: "Ya están abiertas las inscripciones para el nuevo año escolar. Conoce los requisitos y fechas importantes.",
-      // Aquí va todo el texto largo de la noticia
-      contenido: `Nos complace anunciar que el proceso de matrículas para el año lectivo 2025 ha iniciado oficialmente. 
+      contenido: `Nos complace anunciar que el proceso de matrículas para el año lectivo 2026 ha iniciado oficialmente. 
       Invitamos a todos los padres de familia a acercarse a la secretaría académica para reclamar los formularios de inscripción.
       
       Horarios de atención: Lunes a Viernes de 7:00 AM a 3:00 PM.
       Recuerden traer la documentación completa para asegurar el cupo. ¡Los esperamos!`,
-      imagen: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&w=800&q=80"
+      imagen: "/fotos-inicio/matriculas.jpg"
     },
     {
       id: 2,

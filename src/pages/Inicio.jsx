@@ -1,17 +1,46 @@
 // 1. IMPORTAMOS TU IMAGEN LOCAL
 import liceo from "../images/liceo1.png"; 
 
-import React from 'react';
-import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle } from 'lucide-react';
-import { TituloSeccion, TarjetaCristal, TarjetaNoticia } from '../components/UI';
+import React, { useState, useEffect, useRef } from 'react';
+// AGREGAMOS LOS ICONOS DE REDES SOCIALES AQUÍ (Facebook, Instagram, Youtube)
+import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, Youtube } from 'lucide-react';
+import { TituloSeccion, TarjetaCristal } from '../components/UI';
 
 // 2. IMPORTAMOS LOS DATOS DE NOTICIAS
 import { noticiasData } from '../data/noticias'; 
 
 export default function Inicio({ navegarA, verDetalle }) {
   
-  const noticiasSeguras = noticiasData || [];
+  // --- LÓGICA DEL VIDEO INTRO ---
+  const [mostrarModal, setMostrarModal] = useState(false); 
+  const [claseAnimacion, setClaseAnimacion] = useState('opacity-0 scale-95'); 
+  const videoRef = useRef(null);
 
+  useEffect(() => {
+    const yaVisto = sessionStorage.getItem('videoIntroVisto');
+    
+    if (!yaVisto) {
+      setMostrarModal(true);
+      setTimeout(() => {
+        setClaseAnimacion('opacity-100 scale-100'); // FADE IN SUAVE
+        if (videoRef.current) {
+          videoRef.current.play().catch(e => console.log("Autoplay bloqueado:", e));
+        }
+      }, 100);
+    }
+  }, []);
+
+  const finalizarVideo = () => {
+    setClaseAnimacion('opacity-0 scale-95'); // FADE OUT SUAVE
+    sessionStorage.setItem('videoIntroVisto', 'true');
+    setTimeout(() => {
+      setMostrarModal(false);
+    }, 700);
+  };2
+  // -----------------------------
+
+  // ... Lógica de noticias ...
+  const noticiasSeguras = noticiasData || [];
   const obtenerValorFecha = (fechaStr) => {
     const meses = {
       'ENE': 0, 'FEB': 1, 'MAR': 2, 'ABR': 3, 'MAY': 4, 'JUN': 5,
@@ -24,21 +53,17 @@ export default function Inicio({ navegarA, verDetalle }) {
       return 0;
     }
   };
-
   const noticiasOrdenadas = [...noticiasSeguras].sort((a, b) => {
     return obtenerValorFecha(b.fecha) - obtenerValorFecha(a.fecha);
   });
-
   const noticiasDestacadas = noticiasOrdenadas.slice(0, 3);
 
-  // === LISTA DE ACCESOS RÁPIDOS CON ACCIONES ===
   const accesosRapidos = [
     { 
       titulo: "Plataforma Notas", 
       descripcion: "Acceso Padres/Alumnos", 
       imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
       icono: Monitor,
-      // ACCIÓN: Abrir link externo en nueva pestaña
       accion: () => window.open('https://e.plataformaintegra.net/liceoexploradores/', '_blank')
     },
     { 
@@ -46,46 +71,107 @@ export default function Inicio({ navegarA, verDetalle }) {
       descripcion: "Requisitos y fechas", 
       imagen: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80",
       icono: FileText,
-      // ACCIÓN: Ir a la página interna de Admisiones
       accion: () => navegarA('admisiones')
     },
     { 
       titulo: "Calendario", 
-      descripcion: "Cronograma 2025", 
+      descripcion: "Cronograma 2026",
       imagen: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80",
       icono: Calendar,
-      accion: () => {} // Pendiente
+      accion: () => navegarA('calendario')
     },
     { 
       titulo: "PQRS", 
       descripcion: "Atención al ciudadano", 
       imagen: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80",
       icono: Users,
-      accion: () => navegarA('contacto') // Podríamos enviarlo a contacto por ahora
+      accion: () => navegarA('contacto')
     },
   ];
 
   return (
-    <div className="animate-fade-in">
-      
-      {/* SECCIÓN 1: PORTADA */}
+    <div className="animate-fade-in relative">
+
+      {/* ==========================================================
+          WIDGET FLOTANTE DE REDES SOCIALES
+         ========================================================== */}
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end animate-fade-in">
+        
+        {/* Etiqueta vertical SÍGUENOS */}
+        <div className="bg-cyan-600 text-white text-[10px] font-bold py-3 px-1 rounded-l-md shadow-lg mb-1" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+           SÍGUENOS
+        </div>
+
+        {/* Contenedor de Iconos */}
+        <div className="bg-white/90 backdrop-blur-md shadow-2xl rounded-l-xl border-y border-l border-slate-200 p-2 flex flex-col gap-3">
+            
+            {/* FACEBOOK */}
+            <a 
+              href="https://www.facebook.com/profile.php?id=100063857501726" // YA LISTO
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
+              title="Facebook"
+            >
+              <Facebook size={20} />
+            </a>
+
+            {/* INSTAGRAM (PEGA TU LINK AQUÍ) */}
+            <a 
+              href="#" // <--- PEGA AQUÍ TU LINK DE INSTAGRAM
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-2 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
+              title="Instagram"
+            >
+              <Instagram size={20} />
+            </a>
+
+            {/* YOUTUBE (PEGA TU LINK AQUÍ) */}
+            <a 
+              href="#" // <--- PEGA AQUÍ TU LINK DE YOUTUBE
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-2 bg-red-50 text-red-600 rounded-full hover:bg-red-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
+              title="YouTube"
+            >
+              <Youtube size={20} />
+            </a>
+
+        </div>
+      </div>
+      {/* ========================================================== */}
+
+
+      {/* VIDEO MODAL */}
+      {mostrarModal && (
+        <div className={`fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-1000 ease-in-out ${claseAnimacion}`}>
+            <div className="relative w-auto max-w-2xl bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/20 p-1 sm:p-2 flex justify-center items-center">
+               <video 
+                 ref={videoRef}
+                 src="/fotos-inicio/te-esperamos-2026.mp4" 
+                 className="w-auto h-auto max-h-[85vh] mx-auto rounded-2xl object-contain shadow-inner"
+                 controls 
+                 playsInline
+                 onEnded={finalizarVideo} 
+               />
+            </div>
+        </div>
+      )}
+
+      {/* PORTADA */}
       <section className="relative h-[500px] md:h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
            <img src={liceo} alt="Fondo Colegio" className="w-full h-full object-cover object-top" />
         </div>
       </section>
 
-      {/* SECCIÓN 2: ACCESOS RÁPIDOS */}
+      {/* ACCESOS RÁPIDOS */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            
             {accesosRapidos.map((e, i) => (
-              <div 
-                key={i} 
-                onClick={e.accion} // AQUÍ SE EJECUTA LA ACCIÓN AL HACER CLICK
-                className="group cursor-pointer relative h-64 rounded-xl overflow-hidden shadow-lg border border-slate-200 hover:-translate-y-2 transition-all duration-300"
-              >
+              <div key={i} onClick={e.accion} className="group cursor-pointer relative h-64 rounded-xl overflow-hidden shadow-lg border border-slate-200 hover:-translate-y-2 transition-all duration-300">
                 <div className="absolute inset-0">
                    <img src={e.imagen} alt={e.titulo} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
@@ -96,12 +182,11 @@ export default function Inicio({ navegarA, verDetalle }) {
                 </div>
               </div>
             ))}
-
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN 3: NOTICIAS */}
+      {/* NOTICIAS */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
@@ -109,14 +194,10 @@ export default function Inicio({ navegarA, verDetalle }) {
                <h2 className="text-3xl font-bold text-slate-800 uppercase tracking-tight">Actualidad Institucional</h2>
                <div className="h-1.5 w-24 bg-cyan-500 rounded-full mt-4 shadow-sm"></div>
              </div>
-             <button 
-               onClick={() => navegarA('noticias')} 
-               className="hidden md:flex items-center gap-2 text-cyan-600 font-bold hover:translate-x-1 transition-transform"
-             >
+             <button onClick={() => navegarA('noticias')} className="hidden md:flex items-center gap-2 text-cyan-600 font-bold hover:translate-x-1 transition-transform">
                Ver todas las noticias <ArrowRight size={20}/>
              </button>
           </div>
-          
           <div className="grid md:grid-cols-3 gap-8">
             {noticiasDestacadas.map((item) => (
                <div key={item.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group border border-slate-100">
@@ -129,62 +210,76 @@ export default function Inicio({ navegarA, verDetalle }) {
                  <div className="p-6">
                    <h3 className="font-bold text-lg text-slate-800 mb-3 leading-tight group-hover:text-cyan-600 transition-colors">{item.titulo}</h3>
                    <p className="text-slate-500 text-sm mb-4 line-clamp-3">{item.resumen}</p>
-                   <button 
-                     onClick={() => verDetalle(item.id)} 
-                     className="text-cyan-600 font-bold text-sm hover:underline"
-                   >
-                     Leer más &rarr;
-                   </button>
+                   <button onClick={() => verDetalle(item.id)} className="text-cyan-600 font-bold text-sm hover:underline">Leer más →</button>
                  </div>
                </div>
             ))}
           </div>
-
           <button onClick={() => navegarA('noticias')} className="md:hidden mt-8 w-full py-3 border border-cyan-500 text-cyan-600 font-bold rounded-xl hover:bg-cyan-50">
             Ver todas las noticias
           </button>
         </div>
       </section>
 
-      {/* SECCIÓN 4: SEDES */}
+
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6">
-          <TituloSeccion titulo="Nuestras Sedes" />
-          <div className="grid md:grid-cols-2 gap-8">
-             <TarjetaCristal className="flex flex-col md:flex-row overflow-hidden group">
-                <div className="md:w-1/2 h-64 md:h-auto overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=400&q=80" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sede Principal" />
+          <TituloSeccion titulo="Nuestra Sede" />
+          
+          <div className="max-w-5xl mx-auto"> 
+             {/* Tarjeta Única Grande */}
+             <TarjetaCristal className="flex flex-col md:flex-row overflow-hidden group shadow-xl">
+                
+                {/* Imagen Sede */}
+                <div className="md:w-1/2 h-64 md:h-auto overflow-hidden relative">
+                  <img src="/fotos-inicio/7.jpeg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sede Única" />
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
+                  </div>
                 </div>
+
+                {/* Información */}
                 <div className="p-8 md:w-1/2 flex flex-col justify-center">
-                  <h3 className="font-bold text-xl text-slate-800 mb-2">Sede Principal</h3>
-                  <p className="text-sm text-slate-500 mb-4">Barrio Las Granjas</p>
-                  <ul className="text-sm space-y-2 text-slate-600 mb-4">
-                    <li className="flex items-center gap-2"><CheckCircle size={14} className="text-cyan-500"/> Primaria y Bachillerato</li>
-                    <li className="flex items-center gap-2"><CheckCircle size={14} className="text-cyan-500"/> Auditorio Principal</li>
-                    <li className="flex items-center gap-2"><CheckCircle size={14} className="text-cyan-500"/> Laboratorios</li>
-                  </ul>
-                  <button className="text-cyan-600 font-bold text-sm uppercase tracking-wide hover:underline text-left">Ver Ubicación</button>
+                  <h3 className="font-bold text-2xl text-slate-800 mb-2">Sede Única Integral</h3>
+                  <p className="text-sm text-slate-500 mb-6 leading-relaxed">
+                    Contamos con un espacio unificado donde acompañamos el proceso educativo completo de tus hijos en un ambiente seguro y familiar.
+                  </p>
+                  
+                  {/* Lista de Niveles */}
+                  <div className="space-y-6 bg-white/50 p-4 rounded-xl border border-slate-100">
+                    <div>
+                        <h4 className="font-bold text-cyan-700 mb-2 flex items-center gap-2 text-lg">
+                          <CheckCircle className="text-cyan-500" size={20}/> Preescolar
+                        </h4>
+                        <ul className="text-sm text-slate-600 pl-9 list-disc space-y-1">
+                          <li>Prejardín</li>
+                          <li>Jardín</li>
+                          <li>Transición</li>
+                        </ul>
+                    </div>
+                    <div className="border-t border-slate-200 pt-4">
+                        <h4 className="font-bold text-cyan-700 mb-2 flex items-center gap-2 text-lg">
+                          <CheckCircle className="text-cyan-500" size={20}/> Básica Primaria
+                        </h4>
+                        <p className="text-sm text-slate-600 pl-9 font-medium">
+                          Grados 1° a 5°
+                        </p>
+                    </div>
+                  </div>
+
+                  {/* BOTÓN CON UBICACIÓN DE GOOGLE MAPS */}
+                  <button 
+                    onClick={() => window.open('https://maps.app.goo.gl/34E1fQJKzC72Rewc7', '_blank')}
+                    className="mt-8 text-cyan-600 font-bold text-sm uppercase tracking-wide hover:underline text-left flex items-center gap-2"
+                  >
+                    Ver Ubicación en Mapa <ArrowRight size={16}/>
+                  </button>
                 </div>
-             </TarjetaCristal>
-             
-             <TarjetaCristal className="flex flex-col md:flex-row overflow-hidden group">
-                <div className="md:w-1/2 h-64 md:h-auto overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=400&q=80" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sede Preescolar" />
-                </div>
-                <div className="p-8 md:w-1/2 flex flex-col justify-center">
-                  <h3 className="font-bold text-xl text-slate-800 mb-2">Sede Preescolar</h3>
-                  <p className="text-sm text-slate-500 mb-4">Barrio Las Granjas</p>
-                  <ul className="text-sm space-y-2 text-slate-600 mb-4">
-                    <li className="flex items-center gap-2"><CheckCircle size={14} className="text-cyan-500"/> Párvulos a Transición</li>
-                    <li className="flex items-center gap-2"><CheckCircle size={14} className="text-cyan-500"/> Parque Infantil</li>
-                    <li className="flex items-center gap-2"><CheckCircle size={14} className="text-cyan-500"/> Ludoteca</li>
-                  </ul>
-                  <button className="text-cyan-600 font-bold text-sm uppercase tracking-wide hover:underline text-left">Ver Ubicación</button>
-                </div>
+
              </TarjetaCristal>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

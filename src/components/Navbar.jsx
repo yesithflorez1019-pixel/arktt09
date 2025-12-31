@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Backpack, ChevronDown } from 'lucide-react';
-import logoLiceo from "../images/logo_nombre.jpeg";
+import logoLiceo from "../images/logo_nombre.png";
 
 export default function Navbar({ navegarA, paginaActual }) {
   const [menuAbierto, setMenuAbierto] = useState(false);
