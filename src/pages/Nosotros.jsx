@@ -169,7 +169,7 @@ export default function Nosotros() {
         <div className="max-w-4xl mx-auto text-center">
           <TituloSeccion titulo="El Corazón Liceísta" />
           <p className="text-slate-600 mb-12">
-            En el Liceo, cada acción rebosa de dos sentimientos fundamentales que hacen sentir al estudiante en familia:
+            En el Liceo, cada acción rebosa de valores fundamentales que hacen sentir al estudiante en familia.
           </p>
           
           <div className="grid md:grid-cols-2 gap-8">

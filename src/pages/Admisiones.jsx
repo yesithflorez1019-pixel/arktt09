@@ -36,7 +36,6 @@ export default function Admisiones({ navegarA }) {
                   "Certificado médico reciente.",
                   "Paz y Salvo del colegio anterior (si aplica).",
                   "Certificado de notas del año anterior aprobadas.",
-                  "3 Fotos tamaño documento (Fondo azul)."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-slate-600 text-sm">
                     <CheckCircle className="text-green-500 w-5 h-5 shrink-0" />
@@ -46,12 +45,7 @@ export default function Admisiones({ navegarA }) {
               </ul>
             </div>
 
-            <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
-              <h4 className="font-bold text-blue-800 mb-2">Importante:</h4>
-              <p className="text-sm text-blue-700">
-                La compra del formulario de inscripción no garantiza el cupo. El estudiante debe aprobar el proceso de entrevista y/o examen de admisión según el grado.
-              </p>
-            </div>
+            
 
           </div>
 

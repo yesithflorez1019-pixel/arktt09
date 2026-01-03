@@ -207,7 +207,7 @@ export default function Pagos({ navegarA }) {
                      
                      <div className="p-3 bg-red-50 border border-red-100 rounded-lg">
                         <h5 className="font-bold text-red-700 mb-1 flex items-center gap-2 text-xs">
-                           <AlertCircle size={14}/> Mora y Evaluaciones
+                           <AlertCircle size={14}/> Mora
                         </h5>
                         <p className="text-xs leading-relaxed text-red-600/80">
                            {/* Si la imagen dice algo específico sobre fechas, edita este texto */}

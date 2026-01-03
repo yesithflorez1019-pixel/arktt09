@@ -34,7 +34,7 @@ export default function Navbar({ navegarA, paginaActual }) {
                 <img
                   src={logoLiceo}
                   alt="Liceo - Formador de Exploradores"
-                  className="h-10 md:h-12 object-contain"
+                  className="h-20 md:h-50 object-contain"
                 />
               </div>
 
