@@ -1,13 +1,26 @@
 // 1. IMPORTAMOS TU IMAGEN LOCAL
 import liceo from "../images/liceo1.png"; 
-
 import React, { useState, useEffect, useRef } from 'react';
 // AGREGAMOS LOS ICONOS DE REDES SOCIALES AQUÍ (Facebook, Instagram, Youtube)
-import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, Youtube,CreditCard } from 'lucide-react';
 import { TituloSeccion, TarjetaCristal } from '../components/UI';
 
 // 2. IMPORTAMOS LOS DATOS DE NOTICIAS
 import { noticiasData } from '../data/noticias'; 
+
+
+const IconoTikTok = ({ size = 20, className = "" }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className={className}
+  >
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
 
 export default function Inicio({ navegarA, verDetalle }) {
   
@@ -36,7 +49,7 @@ export default function Inicio({ navegarA, verDetalle }) {
     setTimeout(() => {
       setMostrarModal(false);
     }, 700);
-  };2
+  };
   // -----------------------------
 
   // ... Lógica de noticias ...
@@ -81,12 +94,13 @@ export default function Inicio({ navegarA, verDetalle }) {
       accion: () => navegarA('calendario')
     },
     { 
-      titulo: "PQRS", 
-      descripcion: "Atención al ciudadano", 
-      imagen: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80",
-      icono: Users,
-      accion: () => navegarA('contacto')
-    },
+      titulo: "Pagos en Línea", 
+      descripcion: "PSE y Matrículas", 
+      imagen: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80", // La imagen pequeña para la tarjeta
+      icono: CreditCard,
+      accion: () => navegarA('pagos') // <--- CAMBIO AQUÍ: Ahora lleva a la página completa
+    }
+
   ];
 
   return (
@@ -98,7 +112,7 @@ export default function Inicio({ navegarA, verDetalle }) {
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end animate-fade-in">
         
         {/* Etiqueta vertical SÍGUENOS */}
-        <div className="bg-cyan-600 text-white text-[10px] font-bold py-3 px-1 rounded-l-md shadow-lg mb-1" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+        <div className="bg-cyan-600 text-white text-[10px] font-bold py-3 px-1 rounded-l-md shadow-lg mb-1 cursor-default" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
            SÍGUENOS
         </div>
 
@@ -107,35 +121,35 @@ export default function Inicio({ navegarA, verDetalle }) {
             
             {/* FACEBOOK */}
             <a 
-              href="https://www.facebook.com/profile.php?id=100063857501726" // YA LISTO
+              href="https://www.facebook.com/share/1BsV5q8LH2/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
-              title="Facebook"
+              title="Síguenos en Facebook"
             >
               <Facebook size={20} />
             </a>
 
-            {/* INSTAGRAM (PEGA TU LINK AQUÍ) */}
+
             <a 
-              href="#" // <--- PEGA AQUÍ TU LINK DE INSTAGRAM
+              href="https://www.instagram.com/liceoformadordexploradores?igsh=bGRwdnlsd2k2cjhl" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="p-2 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
-              title="Instagram"
+              title="Síguenos en Instagram"
             >
               <Instagram size={20} />
             </a>
 
-            {/* YOUTUBE (PEGA TU LINK AQUÍ) */}
+
             <a 
-              href="#" // <--- PEGA AQUÍ TU LINK DE YOUTUBE
+              href="https://www.tiktok.com/@liceo.formador.de?_r=1&_t=ZS-91Ky5fZOoVj" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="p-2 bg-red-50 text-red-600 rounded-full hover:bg-red-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
-              title="YouTube"
+              className="p-2 bg-slate-100 text-slate-800 rounded-full hover:bg-black hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
+              title="Síguenos en TikTok"
             >
-              <Youtube size={20} />
+              <IconoTikTok size={20} />
             </a>
 
         </div>
@@ -221,7 +235,6 @@ export default function Inicio({ navegarA, verDetalle }) {
         </div>
       </section>
 
-
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6">
           <TituloSeccion titulo="Nuestra Sede" />
@@ -232,6 +245,7 @@ export default function Inicio({ navegarA, verDetalle }) {
                 
                 {/* Imagen Sede */}
                 <div className="md:w-1/2 h-64 md:h-auto overflow-hidden relative">
+                  {/* Asegúrate de que esta ruta de imagen sea correcta según tus archivos subidos */}
                   <img src="/fotos-inicio/7.jpeg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sede Única" />
                   <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
                   </div>

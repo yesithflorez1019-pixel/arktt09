@@ -7,8 +7,10 @@ import Noticias from './pages/Noticias';
 import DetalleNoticia from './pages/DetalleNoticia';
 import Admisiones from './pages/Admisiones';
 import Galeria from './pages/Galeria'; 
+import Nosotros from './pages/Nosotros';
 import { noticiasData } from './data/noticias';
 import Calendario from './pages/Calendario';
+import Pagos from './pages/Pagos';
 
 export default function App() {
   const [paginaActual, setPaginaActual] = useState('inicio');
@@ -31,11 +33,12 @@ export default function App() {
       <Navbar navegarA={navegarA} paginaActual={paginaActual} />
 
       <main className="flex-grow">
-        
+        {paginaActual === 'pagos' && <Pagos navegarA={navegarA} />}
         {paginaActual === 'inicio' && <Inicio navegarA={navegarA} verDetalle={verDetalleNoticia} />}
         {paginaActual === 'noticias' && <Noticias verDetalle={verDetalleNoticia} />}
         {paginaActual === 'admisiones' && <Admisiones navegarA={navegarA} />}
         {paginaActual === 'galeria' && <Galeria navegarA={navegarA} />}
+        {paginaActual === 'nosotros' && <Nosotros />}
         {paginaActual === 'calendario' && <Calendario navegarA={navegarA} />}
         {paginaActual === 'detalle-noticia' && (
           <DetalleNoticia 
@@ -45,7 +48,7 @@ export default function App() {
         )}
         
         {/* 3. QUITAMOS 'galeria' DE ESTA LISTA DE PENDIENTES */}
-        {['academico', 'contacto','nosotros'].includes(paginaActual) && (
+        {['academico', 'contacto'].includes(paginaActual) && (
           <div className="flex items-center justify-center h-[50vh]">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-slate-300 mb-2">Página en Construcción</h2>
