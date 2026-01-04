@@ -154,9 +154,6 @@ export default function Pagos({ navegarA }) {
              </div>
           </div>
 
-          {/* ==========================================================
-              COLUMNA DERECHA: PAGO PSE + POLÍTICAS DE MORA
-             ========================================================== */}
           <div className="space-y-6">
              
              {/* 1. PAGO EN LÍNEA (PSE) */}
@@ -188,7 +185,7 @@ export default function Pagos({ navegarA }) {
                 </button>
              </div>
 
-             {/* 2. POLÍTICAS (ACTUALIZADO CON INFO DE MORA DE LA IMAGEN) */}
+
              <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                 <button 
                   onClick={() => setMostrarPoliticas(!mostrarPoliticas)}

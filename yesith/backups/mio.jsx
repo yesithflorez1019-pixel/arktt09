@@ -1,222 +1,200 @@
-import React, { useState } from 'react';
-import { Copy, CheckCircle, CreditCard, ShieldCheck, AlertCircle, ExternalLink, ArrowLeft, Smartphone, User, Hash, FileText, ChevronDown, ChevronUp } from 'lucide-react';
+import React from 'react';
+import { 
+  Compass, Heart, Sun, Users, BookOpen, 
+  Microscope, Map, Award, Star, Smile 
+} from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
 
-export default function Pagos({ navegarA }) {
-  
-  const [copiado, setCopiado] = useState(false);
-  const [copiadoAlias, setCopiadoAlias] = useState(false);
-  // Estado para el acordeón de políticas (para que no ocupe tanto espacio visualmente de entrada)
-  const [mostrarPoliticas, setMostrarPoliticas] = useState(false);
-  
-  // DATOS ACTUALIZADOS
-  const datosPago = {
-    nombre: "Elizabeth Salgado Bautista",
-    alias: "@ES1096193147",
-    zona: "Zona Bre-b",
-    numeroMovil: "300727447",
-    linkPSE: "https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago-facturadores?idConv=00000934&origen=buscar"
-  };
+export default function Nosotros() {
 
-  const manejarPagoPSE = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(datosPago.numeroMovil);
-    setCopiado(true);
-    setTimeout(() => {
-      setCopiado(false);
-      window.open(datosPago.linkPSE, '_blank');
-    }, 1500); 
-  };
-
-  const copiarAlias = () => {
-    navigator.clipboard.writeText(datosPago.alias);
-    setCopiadoAlias(true);
-    setTimeout(() => setCopiadoAlias(false), 2000);
-  };
+  // Principios extraídos del Manual de Convivencia (Pág. 110-111)
+  const principios = [
+    {
+      titulo: "Trabajo Cooperativo",
+      desc: "Construimos ideas y proyectos juntos, donde el aporte de cada persona es valioso.",
+      icono: Users,
+      color: "bg-blue-100 text-blue-600"
+    },
+    {
+      titulo: "Ciencia y Observación",
+      desc: "Fomentamos el cuestionamiento y la experimentación para establecer hipótesis y descubrir el mundo.",
+      icono: Microscope,
+      color: "bg-purple-100 text-purple-600"
+    },
+    {
+      titulo: "Exploración",
+      desc: "Permitimos que los niños cuestionen, interactúen y ganen independencia investigando su entorno.",
+      icono: Map,
+      color: "bg-green-100 text-green-600"
+    },
+    {
+      titulo: "Lúdica",
+      desc: "Aprendemos desde el juego y la manipulación de objetos para edificar conocimiento haciendo.",
+      icono: Smile,
+      color: "bg-orange-100 text-orange-600"
+    }
+  ];
 
   return (
-    <div className="animate-fade-in bg-slate-50 min-h-screen pb-20 pt-10">
-      <div className="container mx-auto px-6">
+    <div className="animate-fade-in bg-slate-50 min-h-screen font-sans text-slate-700">
+      
+      {/* 1. HEADER: LEMA INSTITUCIONAL */}
+      <div className="bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-8 left-0 w-64 h-64 bg-orange-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
         
-        {/* BOTÓN VOLVER */}
-        <button 
-           onClick={() => navegarA('inicio')} 
-           className="mb-6 flex items-center gap-2 text-slate-500 hover:text-cyan-600 font-bold transition-colors"
-        >
-           <ArrowLeft size={20}/> Volver al Inicio
-        </button>
-
-        <TituloSeccion 
-          titulo="Portal de Pagos" 
-          subtitulo="Gestiona tus pagos de forma segura, rápida y desde cualquier banco." 
-        />
-
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-start mt-8">
-          
-          {/* COLUMNA IZQUIERDA: TARJETA DE INFORMACIÓN (ZONA BRE-B) */}
-          <div className="space-y-6">
-             
-             {/* IMAGEN DECORATIVA */}
-             <div className="rounded-2xl overflow-hidden shadow-lg h-48 relative group">
-                <img 
-                  src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80" 
-                  alt="Pagos Seguros" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent flex items-end p-6">
-                   <p className="text-white font-bold text-lg flex items-center gap-2">
-                     <ShieldCheck className="text-green-400"/> Pagos Verificados
-                   </p>
-                </div>
-             </div>
-
-             {/* TARJETA "ZONA BRE-B" */}
-             <div className="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-50 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
-                
-                <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                  <Smartphone className="text-cyan-600"/> {datosPago.zona}
-                </h3>
-
-                <div className="space-y-4">
-                   {/* TITULAR */}
-                   <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
-                      <div className="bg-white p-2 rounded-full shadow-sm text-cyan-600">
-                         <User size={20}/>
-                      </div>
-                      <div>
-                         <p className="text-xs text-slate-400 font-bold uppercase">Titular</p>
-                         <p className="font-bold text-slate-800 text-lg">{datosPago.nombre}</p>
-                      </div>
-                   </div>
-
-                   {/* ALIAS (Copiable) */}
-                   <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
-                      <div className="flex items-start gap-4">
-                        <div className="bg-white p-2 rounded-full shadow-sm text-purple-600">
-                           <Hash size={20}/>
-                        </div>
-                        <div>
-                           <p className="text-xs text-slate-400 font-bold uppercase">Alias / Código</p>
-                           <p className="font-mono font-bold text-slate-800 text-lg tracking-wider">{datosPago.alias}</p>
-                        </div>
-                      </div>
-                      <button 
-                        onClick={copiarAlias}
-                        className="p-2 hover:bg-white rounded-lg transition-colors text-slate-400 hover:text-cyan-600"
-                        title="Copiar Alias"
-                      >
-                        {copiadoAlias ? <CheckCircle size={20} className="text-green-500"/> : <Copy size={20}/>}
-                      </button>
-                   </div>
-                </div>
-
-                <div className="mt-4 p-3 bg-blue-50 text-blue-700 text-xs rounded-lg flex gap-2 items-center">
-                   <AlertCircle size={16}/>
-                   <span>Compatible para transferencias desde <strong>cualquier banco</strong>.</span>
-                </div>
-             </div>
+        <div className="container mx-auto px-6 py-20 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 text-cyan-700 text-sm font-bold mb-6 tracking-wide uppercase">
+            <Compass size={16} /> Proyecto Educativo Institucional
           </div>
+          <h1 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 leading-tight">
+            "Observando e indagando <br/>
+            <span className="text-cyan-600">los exploradores</span> se van formando"
+          </h1>
+          <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto">
+            Más que un colegio, somos un espacio donde la curiosidad se convierte en conocimiento.
+          </p>
+        </div>
+      </div>
 
-          {/* COLUMNA DERECHA: BOTÓN PSE Y POLÍTICAS */}
-          <div className="space-y-6">
-             
-             {/* TARJETA PSE INTELIGENTE */}
-             <div className="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-[#18397F] relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                   <CreditCard size={150} className="text-[#18397F]"/>
+      {/* 2. NUESTRA HISTORIA (Línea de tiempo narrativa) */}
+      <section className="py-20 container mx-auto px-6">
+        <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100">
+          <div className="grid md:grid-cols-2">
+            
+            {/* Imagen Historia */}
+            <div className="relative h-64 md:h-auto">
+              <img 
+                src="/fotos-galeria/13.jpeg" 
+                alt="Fundación del Liceo" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+                <div className="text-white">
+                  <p className="font-bold text-lg">Fundado en 2017</p>
+                  <p className="text-sm opacity-80">Barrio Las Granjas, Barrancabermeja</p>
                 </div>
-                
-                <h3 className="text-2xl font-bold text-slate-800 mb-2">Pago en Línea (AvalPay)</h3>
-                <p className="text-slate-500 mb-6 leading-relaxed text-sm">
-                  Al hacer clic, <strong>copiaremos el número ({datosPago.numeroMovil})</strong> y te llevaremos al portal seguro para que realices tu pago.
+              </div>
+            </div>
+
+            {/* Texto Historia */}
+            <div className="p-10 md:p-14 flex flex-col justify-center">
+              <h2 className="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <BookOpen className="text-orange-500"/> Nuestra Historia
+              </h2>
+              <div className="space-y-4 text-slate-600 leading-relaxed">
+                <p>
+                  El sueño comenzó con la Licenciada <strong>Elizabeth Salgado Bautista</strong>. Su iniciativa de brindar educación de calidad nació en 2016 y se materializó abriendo puertas el <strong>30 de enero de 2017</strong> con nuestros primeros 65 exploradores.
                 </p>
-
-                {/* BOTÓN PSE PRINCIPAL */}
-                <button 
-                  onClick={manejarPagoPSE}
-                  className="w-full bg-[#18397F] hover:bg-[#122c63] text-white py-4 px-6 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 group/btn relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
-                     <span className="text-[10px] font-black text-[#18397F] tracking-tighter">PSE</span>
-                  </div>
-                  <div className="text-left">
-                    <span className="block text-xs text-blue-200 font-medium">
-                        {copiado ? "¡Número Copiado!" : "Copiar número e"}
-                    </span>
-                    <span className="block font-bold text-lg leading-none">
-                        {copiado ? "Abriendo Banco..." : "Ir a Pagar"}
-                    </span>
-                  </div>
-                  <div className="ml-auto">
-                    {copiado ? <CheckCircle className="text-green-400 animate-bounce"/> : <ExternalLink size={20} className="opacity-70"/>}
-                  </div>
-                </button>
-
-                <p className="text-[10px] text-center text-slate-400 mt-4">
-                  <ShieldCheck size={10} className="inline mr-1"/>
-                  Sitio seguro verificado por Grupo Aval.
+                <p>
+                  Lo que inició como un preescolar familiar, creció gracias a la confianza de los padres. En <strong>2020 ampliamos nuestra cobertura</strong> a la Básica Primaria, estrenando nueva sede.
                 </p>
-             </div>
-
-             {/* === SECCIÓN DE POLÍTICAS (NUEVA) === */}
-             <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <button 
-                  onClick={() => setMostrarPoliticas(!mostrarPoliticas)}
-                  className="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-colors"
-                >
-                   <div className="flex items-center gap-2 font-bold text-slate-700 text-sm">
-                      <FileText size={18} className="text-orange-500"/>
-                      Políticas y Condiciones de Pago
-                   </div>
-                   {mostrarPoliticas ? <ChevronUp size={18} className="text-slate-400"/> : <ChevronDown size={18} className="text-slate-400"/>}
-                </button>
-                
-                {/* Contenido desplegable con la info del PDF */}
-                {mostrarPoliticas && (
-                  <div className="p-6 bg-white text-sm text-slate-600 space-y-4 animate-fade-in">
-                     
-                     <div className="p-3 bg-red-50 border border-red-100 rounded-lg">
-                        <h5 className="font-bold text-red-700 mb-1 flex items-center gap-2">
-                           <AlertCircle size={14}/> Mora y Evaluaciones
-                        </h5>
-                        <p className="text-xs leading-relaxed text-red-600/80">
-                           Los estudiantes que deban <strong>2 meses consecutivos</strong> de pensión no podrán presentar evaluaciones acumulativas hasta establecer un acuerdo de pago.
-                        </p>
-                     </div>
-
-                     <div className="space-y-2">
-                        <p><strong className="text-slate-800">• Informes Académicos:</strong> No se entregarán documentos ni informes hasta encontrarse a paz y salvo con las mensualidades.</p>
-                        <p><strong className="text-slate-800">• Cobro Jurídico:</strong> El pagaré firmado constituye un título valor. En caso de incumplimiento, se hará exigible ante instancias judiciales, asumiendo el padre de familia los costos de ley.</p>
-                        <p><strong className="text-slate-800">• Retiros:</strong> Si un estudiante se retira durante el año escolar, <strong>no habrá devolución de dinero</strong> por matrícula o pensiones ya efectuadas.</p>
-                     </div>
-
-                     <p className="text-[10px] text-slate-400 italic mt-2 border-t pt-2">
-                        Fuente: Manual de Convivencia 2026 (Capítulo 14 - Costos Educativos)
-                     </p>
-                  </div>
-                )}
-             </div>
-
-             {/* RECOMENDACIONES RÁPIDAS */}
-             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-               <ul className="space-y-2 text-xs text-slate-500">
-                 <li className="flex gap-2 items-center">
-                   <CheckCircle size={12} className="text-cyan-500"/>
-                   Envía el comprobante al WhatsApp de Tesorería.
-                 </li>
-                 <li className="flex gap-2 items-center">
-                   <CheckCircle size={12} className="text-cyan-500"/>
-                   Guarda tu número de aprobación.
-                 </li>
-               </ul>
-             </div>
+                <p>
+                  Hoy, bajo la <strong>Resolución 1504</strong>, seguimos transformando el entorno del Barrio Las Granjas, formando seres humanos íntegros, alegres y competentes.
+                </p>
+              </div>
+            </div>
 
           </div>
         </div>
+      </section>
 
-      </div>
+      {/* 3. NUESTRO HORIZONTE (Misión y Visión) */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <TituloSeccion 
+            titulo="Nuestro Horizonte" 
+            subtitulo="La brújula que guía nuestro camino educativo." 
+          />
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mt-12">
+            
+            {/* Tarjeta Misión */}
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-cyan-200 transition-colors group">
+              <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-110 transition-transform">
+                <Award size={28} />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">Misión</h3>
+              <p className="text-slate-600 leading-relaxed text-justify">
+                Ofrecemos educación de calidad en jornada única, permitiendo que niños y niñas vivan su aprendizaje desde el desarrollo integral. Enriquecemos sus saberes invitándolos a <strong>observar, indagar, descubrir y explorar</strong> hasta consolidar el conocimiento mediante estrategias lúdicas.
+              </p>
+            </div>
+
+            {/* Tarjeta Visión */}
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-orange-200 transition-colors group">
+              <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600 mb-6 group-hover:scale-110 transition-transform">
+                <Star size={28} />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">Visión</h3>
+              <p className="text-slate-600 leading-relaxed text-justify">
+                Nos proyectamos como una institución que potencia el conocimiento desde la investigación, donde se irradie alegría y amor. Seremos líderes formando niños <strong>creativos, innovadores y competentes</strong>, capaces de analizar y proponer soluciones para el futuro.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. PRINCIPIOS PEDAGÓGICOS (Grid 4 columnas) */}
+      <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
+        {/* Decoración de fondo */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Principios de Formación</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Nuestra metodología se basa en pilares que permiten al estudiante gozar de su aprendizaje.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {principios.map((prin, i) => (
+              <div key={i} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 hover:bg-slate-800 transition-all">
+                <div className={`w-12 h-12 ${prin.color} rounded-xl flex items-center justify-center mb-4`}>
+                  <prin.icono size={24} />
+                </div>
+                <h3 className="font-bold text-lg mb-2">{prin.titulo}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  {prin.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. VALORES: EL CORAZÓN DEL LICEO */}
+      <section className="py-20 container mx-auto px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <TituloSeccion titulo="El Corazón Liceísta" />
+          <p className="text-slate-600 mb-12">
+            En el Liceo, cada acción rebosa de valores fundamentales que hacen sentir al estudiante en familia.
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* ALEGRÍA */}
+            <div className="p-8 rounded-3xl bg-yellow-50 border border-yellow-100 flex flex-col items-center">
+              <Sun size={48} className="text-yellow-500 mb-4 animate-spin-slow" />
+              <h3 className="text-2xl font-bold text-slate-800 mb-2">Alegría</h3>
+              <p className="text-slate-600 text-sm">
+                Propiciamos un ambiente lleno de buenas energías, donde exteriorizamos la felicidad mediante gestos y acciones positivas.
+              </p>
+            </div>
+
+            {/* AMOR */}
+            <div className="p-8 rounded-3xl bg-red-50 border border-red-100 flex flex-col items-center">
+              <Heart size={48} className="text-red-500 mb-4 animate-pulse" />
+              <h3 className="text-2xl font-bold text-slate-800 mb-2">Amor</h3>
+              <p className="text-slate-600 text-sm">
+                El sentimiento universal que agrupa lo más positivo del ser humano. Es la base de nuestro trato familiar y cercano.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
+

@@ -1,200 +1,211 @@
 import React from 'react';
 import { 
   Compass, Heart, Sun, Users, BookOpen, 
-  Microscope, Map, Award, Star, Smile 
+  Microscope, Map, Award, Star, Smile, Leaf, Zap, BarChart3, TreePine 
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
 
 export default function Nosotros() {
 
-  // Principios extraídos del Manual de Convivencia (Pág. 110-111)
-  const principios = [
-    {
-      titulo: "Trabajo Cooperativo",
-      desc: "Construimos ideas y proyectos juntos, donde el aporte de cada persona es valioso.",
-      icono: Users,
-      color: "bg-blue-100 text-blue-600"
-    },
-    {
-      titulo: "Ciencia y Observación",
-      desc: "Fomentamos el cuestionamiento y la experimentación para establecer hipótesis y descubrir el mundo.",
-      icono: Microscope,
-      color: "bg-purple-100 text-purple-600"
-    },
-    {
-      titulo: "Exploración",
-      desc: "Permitimos que los niños cuestionen, interactúen y ganen independencia investigando su entorno.",
-      icono: Map,
-      color: "bg-green-100 text-green-600"
-    },
-    {
-      titulo: "Lúdica",
-      desc: "Aprendemos desde el juego y la manipulación de objetos para edificar conocimiento haciendo.",
-      icono: Smile,
-      color: "bg-orange-100 text-orange-600"
-    }
-  ];
-
   return (
-    <div className="animate-fade-in bg-slate-50 min-h-screen font-sans text-slate-700">
+    <div className="animate-fade-in bg-white min-h-screen font-sans text-slate-700">
       
-      {/* 1. HEADER: LEMA INSTITUCIONAL */}
-      <div className="bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-8 left-0 w-64 h-64 bg-orange-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-        
-        <div className="container mx-auto px-6 py-20 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 text-cyan-700 text-sm font-bold mb-6 tracking-wide uppercase">
-            <Compass size={16} /> Proyecto Educativo Institucional
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 leading-tight">
+      {/* 1. HEADER LIMPIO */}
+      <div className="relative pt-24 pb-20 text-center px-6 bg-slate-50">
+        <div className="max-w-4xl mx-auto">
+          
+          <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
             "Observando e indagando <br/>
             <span className="text-cyan-600">los exploradores</span> se van formando"
           </h1>
-          <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto">
-            Más que un colegio, somos un espacio donde la curiosidad se convierte en conocimiento.
-          </p>
         </div>
       </div>
 
-      {/* 2. NUESTRA HISTORIA (Línea de tiempo narrativa) */}
+      {/* 2. ZIG-ZAG: HISTORIA */}
       <section className="py-20 container mx-auto px-6">
-        <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100">
-          <div className="grid md:grid-cols-2">
-            
-            {/* Imagen Historia */}
-            <div className="relative h-64 md:h-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+           <div className="relative">
+              <div className="absolute -inset-4 bg-orange-100 rounded-tr-[4rem] rounded-bl-[4rem] -z-10"></div>
               <img 
-                src="/fotos-galeria/13.jpeg" 
-                alt="Fundación del Liceo" 
-                className="absolute inset-0 w-full h-full object-cover"
+                src="/fotos-galeria/13.jpeg"
+                alt="Historia" 
+                className="rounded-tr-[3rem] rounded-bl-[3rem] shadow-xl w-full object-cover h-96"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
-                <div className="text-white">
-                  <p className="font-bold text-lg">Fundado en 2017</p>
-                  <p className="text-sm opacity-80">Barrio Las Granjas, Barrancabermeja</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Texto Historia */}
-            <div className="p-10 md:p-14 flex flex-col justify-center">
+           </div>
+           <div>
               <h2 className="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <BookOpen className="text-orange-500"/> Nuestra Historia
+                 <BookOpen className="text-orange-500" size={32}/> Nuestra Historia
               </h2>
-              <div className="space-y-4 text-slate-600 leading-relaxed">
-                <p>
-                  El sueño comenzó con la Licenciada <strong>Elizabeth Salgado Bautista</strong>. Su iniciativa de brindar educación de calidad nació en 2016 y se materializó abriendo puertas el <strong>30 de enero de 2017</strong> con nuestros primeros 65 exploradores.
-                </p>
-                <p>
-                  Lo que inició como un preescolar familiar, creció gracias a la confianza de los padres. En <strong>2020 ampliamos nuestra cobertura</strong> a la Básica Primaria, estrenando nueva sede.
-                </p>
-                <p>
-                  Hoy, bajo la <strong>Resolución 1504</strong>, seguimos transformando el entorno del Barrio Las Granjas, formando seres humanos íntegros, alegres y competentes.
-                </p>
+              <div className="space-y-4 text-lg text-slate-600 leading-relaxed text-justify">
+                 <p>
+                    Todo comenzó en <strong>2016</strong> con el sueño de la Lic. Elizabeth Salgado. Abrimos puertas en 2017 con 65 estudiantes y un corazón lleno de ilusión.
+                 </p>
+                 <p>
+                    Para el <strong>2020</strong>, gracias al apoyo de las familias, ampliamos a la Básica Primaria. Hoy, bajo la Resolución 1504, somos un referente de calidad humana y académica en el Barrio Las Granjas.
+                 </p>
               </div>
-            </div>
-
-          </div>
+           </div>
         </div>
       </section>
 
-      {/* 3. NUESTRO HORIZONTE (Misión y Visión) */}
-      <section className="py-16 bg-white">
+      {/* 3. ZIG-ZAG: ECO-LICEO (SOLAR) */}
+      <section className="py-20 bg-green-50/50">
         <div className="container mx-auto px-6">
-          <TituloSeccion 
-            titulo="Nuestro Horizonte" 
-            subtitulo="La brújula que guía nuestro camino educativo." 
-          />
+           <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Texto */}
+              <div className="order-2 lg:order-1">
+                 <div className="inline-block p-3 bg-green-100 text-green-700 rounded-xl mb-4">
+                    <Leaf size={24}/>
+                 </div>
+                 <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-6">
+                    Pioneros en <span className="text-green-600">Energía Solar</span>
+                 </h2>
+                 <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                    Somos de las primeras instituciones educativas en implementar un sistema fotovoltaico propio. No solo ahorramos energía, enseñamos a nuestros estudiantes a amar y cuidar el planeta con el ejemplo.
+                 </p>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mt-12">
-            
-            {/* Tarjeta Misión */}
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-cyan-200 transition-colors group">
-              <div className="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-110 transition-transform">
-                <Award size={28} />
+                 {/* Stats */}
+                 <div className="grid grid-cols-3 gap-4">
+                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-green-100 text-center hover:-translate-y-1 transition-transform">
+                       <Zap className="mx-auto text-yellow-500 mb-2" size={24}/>
+                       <div className="font-black text-xl text-slate-800">12.5</div>
+                       <div className="text-[10px] font-bold text-slate-400 uppercase">MWh Gen</div>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-green-100 text-center hover:-translate-y-1 transition-transform">
+                       <TreePine className="mx-auto text-green-600 mb-2" size={24}/>
+                       <div className="font-black text-xl text-slate-800">450</div>
+                       <div className="text-[10px] font-bold text-slate-400 uppercase">Árboles</div>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-green-100 text-center hover:-translate-y-1 transition-transform">
+                       <BarChart3 className="mx-auto text-blue-500 mb-2" size={24}/>
+                       <div className="font-black text-xl text-slate-800">8.3</div>
+                       <div className="text-[10px] font-bold text-slate-400 uppercase">Ton CO2</div>
+                    </div>
+                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-slate-800 mb-4">Misión</h3>
-              <p className="text-slate-600 leading-relaxed text-justify">
-                Ofrecemos educación de calidad en jornada única, permitiendo que niños y niñas vivan su aprendizaje desde el desarrollo integral. Enriquecemos sus saberes invitándolos a <strong>observar, indagar, descubrir y explorar</strong> hasta consolidar el conocimiento mediante estrategias lúdicas.
-              </p>
-            </div>
 
-            {/* Tarjeta Visión */}
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-orange-200 transition-colors group">
-              <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600 mb-6 group-hover:scale-110 transition-transform">
-                <Star size={28} />
+              {/* Imagen */}
+              <div className="relative order-1 lg:order-2">
+                 <div className="absolute -inset-4 bg-green-200 rounded-tl-[4rem] rounded-br-[4rem] -z-10"></div>
+                 <img 
+                    src="/fotos-galeria/47.png"
+                    alt="Paneles Solares" 
+                    className="rounded-tl-[3rem] rounded-br-[3rem] shadow-xl w-full object-cover h-96"
+                 />
               </div>
-              <h3 className="text-2xl font-bold text-slate-800 mb-4">Visión</h3>
-              <p className="text-slate-600 leading-relaxed text-justify">
-                Nos proyectamos como una institución que potencia el conocimiento desde la investigación, donde se irradie alegría y amor. Seremos líderes formando niños <strong>creativos, innovadores y competentes</strong>, capaces de analizar y proponer soluciones para el futuro.
-              </p>
-            </div>
-
-          </div>
+           </div>
         </div>
       </section>
 
-      {/* 4. PRINCIPIOS PEDAGÓGICOS (Grid 4 columnas) */}
-      <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
-        {/* Decoración de fondo */}
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Principios de Formación</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
-              Nuestra metodología se basa en pilares que permiten al estudiante gozar de su aprendizaje.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {principios.map((prin, i) => (
-              <div key={i} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-700 hover:bg-slate-800 transition-all">
-                <div className={`w-12 h-12 ${prin.color} rounded-xl flex items-center justify-center mb-4`}>
-                  <prin.icono size={24} />
-                </div>
-                <h3 className="font-bold text-lg mb-2">{prin.titulo}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  {prin.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. VALORES: EL CORAZÓN DEL LICEO */}
+      {/* 4. MISIÓN Y VISIÓN */}
       <section className="py-20 container mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <TituloSeccion titulo="El Corazón Liceísta" />
-          <p className="text-slate-600 mb-12">
-            En el Liceo, cada acción rebosa de valores fundamentales que hacen sentir al estudiante en familia.
-          </p>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* ALEGRÍA */}
-            <div className="p-8 rounded-3xl bg-yellow-50 border border-yellow-100 flex flex-col items-center">
-              <Sun size={48} className="text-yellow-500 mb-4 animate-spin-slow" />
-              <h3 className="text-2xl font-bold text-slate-800 mb-2">Alegría</h3>
-              <p className="text-slate-600 text-sm">
-                Propiciamos un ambiente lleno de buenas energías, donde exteriorizamos la felicidad mediante gestos y acciones positivas.
-              </p>
+         <TituloSeccion 
+                     titulo="Nuestro Horizonte" 
+                     subtitulo="La brújula que guía nuestro camino educativo." 
+                   />
+         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mt-12">
+            <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all hover:border-cyan-200">
+               <Award size={40} className="text-cyan-600 mb-4"/>
+               <h3 className="text-2xl font-bold text-slate-800 mb-4">Misión</h3>
+               <p className="text-slate-600 text-justify">
+                  Ofrecemos educación de calidad en jornada única. Enriquecemos saberes invitando a <strong>observar, indagar y descubrir</strong> para consolidar el conocimiento mediante la lúdica.
+               </p>
             </div>
+            <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-all hover:border-orange-200">
+               <Star size={40} className="text-orange-500 mb-4"/>
+               <h3 className="text-2xl font-bold text-slate-800 mb-4">Visión</h3>
+               <p className="text-slate-600 text-justify">
+                  Ser líderes formando niños <strong>creativos e innovadores</strong>. Una institución que potencia el conocimiento desde la investigación, irradiando alegría y amor.
+               </p>
+            </div>
+         </div>
+      </section>
 
-            {/* AMOR */}
-            <div className="p-8 rounded-3xl bg-red-50 border border-red-100 flex flex-col items-center">
-              <Heart size={48} className="text-red-500 mb-4 animate-pulse" />
-              <h3 className="text-2xl font-bold text-slate-800 mb-2">Amor</h3>
-              <p className="text-slate-600 text-sm">
-                El sentimiento universal que agrupa lo más positivo del ser humano. Es la base de nuestro trato familiar y cercano.
-              </p>
+      {/* 5. PRINCIPIOS DE FORMACIÓN (REDISEÑADO - LUMINOSO) */}
+      <section className="py-20 bg-slate-50">
+         <div className="container mx-auto px-6">
+            <div className="text-center mb-12">
+               <h2 className="text-3xl font-bold text-slate-800">Principios de Formación</h2>
+               <p className="text-slate-500 mt-2">Nuestra metodología se basa en pilares que permiten al estudiante gozar de su aprendizaje.</p>
             </div>
+            
+            <div className="grid md:grid-cols-4 gap-6">
+               
+               {/* Pilar 1 */}
+               <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-blue-500 hover:shadow-xl transition-shadow text-center">
+                  <div className="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-4">
+                     <Users size={24}/>
+                  </div>
+                  <h4 className="font-bold text-slate-800 mb-2">Trabajo Cooperativo</h4>
+                  <p className="text-sm text-slate-500">Construimos ideas y proyectos juntos, donde el aporte de cada persona es valioso.</p>
+               </div>
+
+               {/* Pilar 2 */}
+               <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-purple-500 hover:shadow-xl transition-shadow text-center">
+                  <div className="w-12 h-12 mx-auto bg-purple-50 rounded-full flex items-center justify-center text-purple-600 mb-4">
+                     <Microscope size={24}/>
+                  </div>
+                  <h4 className="font-bold text-slate-800 mb-2">Ciencia y Observación</h4>
+                  <p className="text-sm text-slate-500">Fomentamos el cuestionamiento y la experimentación para establecer hipótesis y descubrir el mundo.</p>
+               </div>
+
+               {/* Pilar 3 */}
+               <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-green-500 hover:shadow-xl transition-shadow text-center">
+                  <div className="w-12 h-12 mx-auto bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-4">
+                     <Map size={24}/>
+                  </div>
+                  <h4 className="font-bold text-slate-800 mb-2">Exploración</h4>
+                  <p className="text-sm text-slate-500">Permitimos que los niños cuestionen, interactúen y ganen independencia investigando su entorno</p>
+               </div>
+
+               {/* Pilar 4 */}
+               <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-orange-500 hover:shadow-xl transition-shadow text-center">
+                  <div className="w-12 h-12 mx-auto bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mb-4">
+                     <Smile size={24}/>
+                  </div>
+                  <h4 className="font-bold text-slate-800 mb-2">Lúdica</h4>
+                  <p className="text-sm text-slate-500">Aprendemos desde el juego y la manipulación de objetos para edificar conocimiento haciendo.</p>
+               </div>
+
+            </div>
+         </div>
+      </section>
+
+      {/* 6. EL CORAZÓN LICEÍSTA (VALORES) */}
+      <section className="py-20 container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+             
+                       <TituloSeccion titulo="El Corazón Liceísta" />
+                       <p className="text-slate-600 mb-12">
+                         En el Liceo, cada acción rebosa de valores fundamentales que hacen sentir al estudiante en familia.
+                       </p>
+             
+             <div className="grid md:grid-cols-2 gap-8">
+                {/* Alegría */}
+                <div className="p-8 rounded-3xl bg-yellow-50 border border-yellow-100 flex items-center gap-6 text-left hover:scale-105 transition-transform">
+                   <div className="p-4 bg-white rounded-full shadow-sm text-yellow-500">
+                      <Sun size={32} className="animate-spin-slow"/>
+                   </div>
+                   <div>
+                      <h3 className="text-xl font-bold text-slate-800">Alegría</h3>
+                      <p className="text-sm text-slate-600 mt-1">Propiciamos un ambiente lleno de buenas energías, donde exteriorizamos la felicidad mediante gestos y acciones positivas..</p>
+                   </div>
+                </div>
+
+                {/* Amor */}
+                <div className="p-8 rounded-3xl bg-red-50 border border-red-100 flex items-center gap-6 text-left hover:scale-105 transition-transform">
+                   <div className="p-4 bg-white rounded-full shadow-sm text-red-500">
+                      <Heart size={32} className="animate-pulse"/>
+                   </div>
+                   <div>
+                      <h3 className="text-xl font-bold text-slate-800">Amor</h3>
+                      <p className="text-sm text-slate-600 mt-1">El sentimiento universal que agrupa lo más positivo del ser humano. Es la base de nuestro trato familiar y cercano.</p>
+                   </div>
+                </div>
+             </div>
           </div>
-        </div>
       </section>
 
     </div>
   );
 }
-

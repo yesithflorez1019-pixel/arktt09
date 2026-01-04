@@ -1,57 +1,31 @@
-// 1. IMPORTAMOS TU IMAGEN LOCAL
+// 1. IMPORTAMOS LAS IMÁGENES Y REACT
 import liceo from "../images/liceo1.png"; 
-import React, { useState, useEffect, useRef } from 'react';
-// AGREGAMOS LOS ICONOS DE REDES SOCIALES AQUÍ (Facebook, Instagram, Youtube)
-import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, Youtube,CreditCard } from 'lucide-react';
+import React from 'react';
+
+// --- IMPORTACIONES DE SWIPER (CARRUSEL) ---
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay, A11y } from 'swiper/modules';
+// Importamos los estilos de Swiper obligatorios
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// --- IMPORTACIONES DE ICONOS Y COMPONENTES UI ---
+import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, CreditCard } from 'lucide-react';
 import { TituloSeccion, TarjetaCristal } from '../components/UI';
 
 // 2. IMPORTAMOS LOS DATOS DE NOTICIAS
 import { noticiasData } from '../data/noticias'; 
 
-
+// --- COMPONENTE ICONO TIKTOK ---
 const IconoTikTok = ({ size = 20, className = "" }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width={size} 
-    height={size} 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
-    className={className}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
   </svg>
 );
 
 export default function Inicio({ navegarA, verDetalle }) {
   
-  // --- LÓGICA DEL VIDEO INTRO ---
-  const [mostrarModal, setMostrarModal] = useState(false); 
-  const [claseAnimacion, setClaseAnimacion] = useState('opacity-0 scale-95'); 
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const yaVisto = sessionStorage.getItem('videoIntroVisto');
-    
-    if (!yaVisto) {
-      setMostrarModal(true);
-      setTimeout(() => {
-        setClaseAnimacion('opacity-100 scale-100'); // FADE IN SUAVE
-        if (videoRef.current) {
-          videoRef.current.play().catch(e => console.log("Autoplay bloqueado:", e));
-        }
-      }, 100);
-    }
-  }, []);
-
-  const finalizarVideo = () => {
-    setClaseAnimacion('opacity-0 scale-95'); // FADE OUT SUAVE
-    sessionStorage.setItem('videoIntroVisto', 'true');
-    setTimeout(() => {
-      setMostrarModal(false);
-    }, 700);
-  };
-  // -----------------------------
-
   // ... Lógica de noticias ...
   const noticiasSeguras = noticiasData || [];
   const obtenerValorFecha = (fechaStr) => {
@@ -71,7 +45,7 @@ export default function Inicio({ navegarA, verDetalle }) {
   });
   const noticiasDestacadas = noticiasOrdenadas.slice(0, 3);
 
-  const accesosRapidos = [
+   const accesosRapidos = [
     { 
       titulo: "Plataforma Notas", 
       descripcion: "Acceso Padres/Alumnos", 
@@ -106,81 +80,122 @@ export default function Inicio({ navegarA, verDetalle }) {
   return (
     <div className="animate-fade-in relative">
 
-      {/* ==========================================================
-          WIDGET FLOTANTE DE REDES SOCIALES
-         ========================================================== */}
+      {/* WIDGET FLOTANTE DE REDES SOCIALES */}
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end animate-fade-in">
-        
-        {/* Etiqueta vertical SÍGUENOS */}
         <div className="bg-cyan-600 text-white text-[10px] font-bold py-3 px-1 rounded-l-md shadow-lg mb-1 cursor-default" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
            SÍGUENOS
         </div>
 
-        {/* Contenedor de Iconos */}
         <div className="bg-white/90 backdrop-blur-md shadow-2xl rounded-l-xl border-y border-l border-slate-200 p-2 flex flex-col gap-3">
-            
-            {/* FACEBOOK */}
-            <a 
-              href="https://www.facebook.com/share/1BsV5q8LH2/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
-              title="Síguenos en Facebook"
-            >
-              <Facebook size={20} />
-            </a>
-
-
-            <a 
-              href="https://www.instagram.com/liceoformadordexploradores?igsh=bGRwdnlsd2k2cjhl" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="p-2 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
-              title="Síguenos en Instagram"
-            >
-              <Instagram size={20} />
-            </a>
-
-
-            <a 
-              href="https://www.tiktok.com/@liceo.formador.de?_r=1&_t=ZS-91Ky5fZOoVj" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="p-2 bg-slate-100 text-slate-800 rounded-full hover:bg-black hover:text-white transition-all duration-300 hover:scale-110 shadow-sm"
-              title="Síguenos en TikTok"
-            >
-              <IconoTikTok size={20} />
-            </a>
-
+            <a href="https://www.facebook.com/share/1BsV5q8LH2/" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm" title="Síguenos en Facebook"><Facebook size={20} /></a>
+            <a href="https://www.instagram.com/liceoformadordexploradores?igsh=bGRwdnlsd2k2cjhl" target="_blank" rel="noopener noreferrer" className="p-2 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-600 hover:text-white transition-all duration-300 hover:scale-110 shadow-sm" title="Síguenos en Instagram"><Instagram size={20} /></a>
+            <a href="https://www.tiktok.com/@liceo.formador.de?_r=1&_t=ZS-91Ky5fZOoVj" target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-100 text-slate-800 rounded-full hover:bg-black hover:text-white transition-all duration-300 hover:scale-110 shadow-sm" title="Síguenos en TikTok"><IconoTikTok size={20} /></a>
         </div>
       </div>
-      {/* ========================================================== */}
 
 
-      {/* VIDEO MODAL */}
-      {mostrarModal && (
-        <div className={`fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-1000 ease-in-out ${claseAnimacion}`}>
-            <div className="relative w-auto max-w-2xl bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/20 p-1 sm:p-2 flex justify-center items-center">
+      <section className="relative h-[500px] md:h-[600px] lg:h-[750px] bg-slate-900 group">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay, A11y]}
+          spaceBetween={0}
+          slidesPerView={1}
+          navigation={true}
+          pagination={{ clickable: true, dynamicBullets: true }}
+          loop={true}
+          autoplay={{
+            delay: 28000, 
+            disableOnInteraction: false,
+          }}
+          className="h-full w-full swiper-hero"
+        >
+
+          <SwiperSlide className="relative overflow-hidden flex items-center justify-center bg-slate-900">
+            
+
+            <div className="absolute inset-0 z-0">
                <video 
-                 ref={videoRef}
-                 src="/fotos-inicio/te-esperamos-2026.mp4" 
-                 className="w-auto h-auto max-h-[85vh] mx-auto rounded-2xl object-contain shadow-inner"
-                 controls 
-                 playsInline
-                 onEnded={finalizarVideo} 
+                 src="/fotos-inicio/inicio.mp4"
+
+                 className="w-full h-full object-cover blur-2xl scale-110 opacity-60" 
+                 autoPlay muted loop playsInline
                />
+
+               <div className="absolute inset-0 bg-black/40"></div>
             </div>
-        </div>
-      )}
 
-      {/* PORTADA */}
-      <section className="relative h-[500px] md:h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-           <img src={liceo} alt="Fondo Colegio" className="w-full h-full object-cover object-top" />
-        </div>
+            {/* 2. VIDEO PRINCIPAL:  */}
+            <div className="relative z-10 h-full w-full flex items-center justify-center p-4 md:p-8">
+                <video 
+                  src="/fotos-inicio/inicio.mp4"
+                  
+                  className="w-auto h-auto max-w-full max-h-full object-contain rounded-xl shadow-2xl border border-white/10"
+                  autoPlay muted loop playsInline
+                />
+            </div>
+            
+          
+            <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center text-center text-white p-4 pointer-events-none animate-fade-in-up">
+              <h2 className="text-2xl md:text-4xl font-black drop-shadow-lg uppercase bg-cyan-900/80 px-6 py-2 rounded-full inline-block backdrop-blur-sm border border-cyan-500/30">
+                ¡Matrículas Abiertas 2026!
+              </h2>
+            </div>
+          </SwiperSlide>
+
+          {/* --- DIAPOSITIVA 2: IMAGEN ORIGINAL --- */}
+          <SwiperSlide className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 to-transparent z-10"></div>
+            <img src={liceo} alt="Fachada Colegio" className="w-full h-full object-cover object-top" />
+            <div className="absolute bottom-0 left-0 z-20 p-8 md:p-16 text-white max-w-3xl">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg leading-tight">Formando líderes del futuro</h2>
+              <p className="text-lg md:text-xl opacity-90 drop-shadow-md mb-6">Una educación integral basada en valores, ciencia y exploración.</p>
+            </div>
+          </SwiperSlide>
+
+          
+
+        </Swiper>
+
+        <style jsx global>{`
+          .swiper-hero .swiper-button-next,
+          .swiper-hero .swiper-button-prev {
+            color: white;
+            background-color: rgba(0,0,0,0.3);
+            padding: 30px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            opacity: 0;
+          }
+          .group:hover .swiper-button-next,
+          .group:hover .swiper-button-prev {
+            opacity: 1;
+          }
+          .swiper-hero .swiper-button-next:hover,
+          .swiper-hero .swiper-button-prev::hover {
+            background-color: rgba(6, 182, 212, 0.8);
+          }
+          .swiper-hero .swiper-button-next::after,
+          .swiper-hero .swiper-button-prev::after {
+            font-size: 24px;
+            font-weight: bold;
+          }
+          .swiper-hero .swiper-pagination-bullet {
+            background: white;
+            opacity: 0.5;
+            width: 10px;
+            height: 10px;
+          }
+          .swiper-hero .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #06b6d4;
+            width: 20px;
+            border-radius: 5px;
+          }
+        `}</style>
       </section>
+      {/* ================================================================== */}
 
-      {/* ACCESOS RÁPIDOS */}
+
+       {/* ACCESOS RÁPIDOS */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -235,6 +250,7 @@ export default function Inicio({ navegarA, verDetalle }) {
         </div>
       </section>
 
+      {/* SEDE */}
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6">
           <TituloSeccion titulo="Nuestra Sede" />
@@ -245,7 +261,6 @@ export default function Inicio({ navegarA, verDetalle }) {
                 
                 {/* Imagen Sede */}
                 <div className="md:w-1/2 h-64 md:h-auto overflow-hidden relative">
-                  {/* Asegúrate de que esta ruta de imagen sea correcta según tus archivos subidos */}
                   <img src="/fotos-inicio/7.jpeg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sede Única" />
                   <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
                   </div>

@@ -11,6 +11,8 @@ import Nosotros from './pages/Nosotros';
 import { noticiasData } from './data/noticias';
 import Calendario from './pages/Calendario';
 import Pagos from './pages/Pagos';
+import Contacto from './pages/Contacto';
+import GestionAcademica from './pages/GestionAcademica';
 
 export default function App() {
   const [paginaActual, setPaginaActual] = useState('inicio');
@@ -40,6 +42,9 @@ export default function App() {
         {paginaActual === 'galeria' && <Galeria navegarA={navegarA} />}
         {paginaActual === 'nosotros' && <Nosotros />}
         {paginaActual === 'calendario' && <Calendario navegarA={navegarA} />}
+        {paginaActual === 'contacto' && <Contacto />}
+        {paginaActual === 'academico' && <GestionAcademica />}
+        
         {paginaActual === 'detalle-noticia' && (
           <DetalleNoticia 
             noticia={noticiasData.find(n => n.id === noticiaSeleccionadaId)}
@@ -48,7 +53,7 @@ export default function App() {
         )}
         
         {/* 3. QUITAMOS 'galeria' DE ESTA LISTA DE PENDIENTES */}
-        {['academico', 'contacto'].includes(paginaActual) && (
+        {['academico', ].includes(paginaActual) && (
           <div className="flex items-center justify-center h-[50vh]">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-slate-300 mb-2">Página en Construcción</h2>

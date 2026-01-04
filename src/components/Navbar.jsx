@@ -8,7 +8,6 @@ export default function Navbar({ navegarA, paginaActual }) {
   const enlacesMenu = [
     { id: 'inicio', etiqueta: 'INICIO' },
     { id: 'nosotros', etiqueta: 'NOSOTROS' },
-    { id: 'academico', etiqueta: 'GESTIÓN ACADÉMICA' }, // Nombre más institucional
     { id: 'galeria', etiqueta: 'GALERÍA' },
     { id: 'contacto', etiqueta: 'CONTACTO' },
   ];
