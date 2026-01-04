@@ -10,6 +10,7 @@ import {
   Info
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
+import SEO from '../components/SEO';
 
 export default function Calendario({ navegarA }) {
   // Estado para saber qué mes está viendo el usuario (0 = Enero, 11 = Diciembre)
@@ -53,6 +54,11 @@ export default function Calendario({ navegarA }) {
 
   return (
     <div className="animate-fade-in pt-12 pb-20 bg-slate-50 min-h-screen">
+      <SEO 
+        title="Calendario Académico 2026" 
+        description="Consulta las fechas importantes: inicio de clases, entregas de informes, vacaciones y eventos institucionales."
+        keywords="calendario escolar 2026, fechas importantes liceo, cronograma escolar"
+      />
       <div className="container mx-auto px-6">
         
         <TituloSeccion 

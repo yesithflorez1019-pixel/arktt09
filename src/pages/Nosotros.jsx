@@ -4,12 +4,18 @@ import {
   Microscope, Map, Award, Star, Smile, Leaf, Zap, BarChart3, TreePine 
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
-
+import SEO from '../components/SEO';
 export default function Nosotros() {
 
   return (
     <div className="animate-fade-in bg-white min-h-screen font-sans text-slate-700">
-      
+
+       <SEO 
+        title="Quiénes Somos - Pioneros en Energía Solar" 
+        description="Conoce la historia del Liceo Formador de Exploradores. Somos pioneros en Barrancabermeja con nuestro sistema de energía solar y modelo pedagógico innovador."
+        keywords="historia liceo, colegio paneles solares, colegio ecologico barrancabermeja, liceo formador"
+      />
+
       {/* 1. HEADER LIMPIO */}
       <div className="relative pt-24 pb-20 text-center px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Copy, CheckCircle, CreditCard, ShieldCheck, AlertCircle, ExternalLink, ArrowLeft, Smartphone, User, Hash, FileText, ChevronDown, ChevronUp, Store, Banknote } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
-
+import SEO from '../components/SEO';
 export default function Pagos({ navegarA }) {
+   <SEO 
+        title="Pagos en Línea" 
+        description="Portal de pagos seguro. Paga tu pensión por PSE , Efecty  o Bancolombia."
+        keywords="pagos liceo formador, codigo convenio efecty 934, pagar pension liceo, PSE avalpay center"
+      />
   
   const [copiado, setCopiado] = useState(false);
   const [copiadoAlias, setCopiadoAlias] = useState(false);

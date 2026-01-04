@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Image, Grid, ArrowLeft, Calendar, ArrowRight, ZoomIn } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
+import SEO from '../components/SEO';
 
-//zona para agregar 
 
 
 const galeriaEventos = [
@@ -47,6 +47,11 @@ export default function Galeria({ navegarA }) {
 
   return (
     <div className="animate-fade-in pt-12 pb-20 bg-slate-50 min-h-screen">
+      <SEO 
+        title="Galería" 
+        description="Explora nuestras instalaciones, actividades  y los mejores momentos de nuestros exploradores."
+        keywords="fotos colegio, instalaciones liceo formador, actividades preescolar barrancabermeja"
+      />
       <div className="container mx-auto px-6">
         
         {/* ==============================================

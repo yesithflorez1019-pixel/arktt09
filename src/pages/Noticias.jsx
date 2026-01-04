@@ -1,10 +1,16 @@
 import React from 'react';
 import { TituloSeccion } from '../components/UI';
 import { noticiasData } from '../data/noticias'; // Importamos los datos
+import SEO from '../components/SEO';
 
 export default function Noticias({ verDetalle }) {
   return (
     <div className="animate-fade-in pt-12 pb-20 bg-slate-50 min-h-screen">
+      <SEO 
+        title="Noticias" 
+        description="Mantente al día con las últimas actividades y eventos del Liceo Formador de Exploradores."
+        keywords="noticias colegio, circulares padres de familia, eventos liceo barrancabermeja"
+      />
       <div className="container mx-auto px-6">
         <TituloSeccion titulo="Noticias y Eventos" subtitulo="Mantente al día con todo lo que sucede en el Liceo." />
 

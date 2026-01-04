@@ -1,7 +1,7 @@
 // 1. IMPORTAMOS LAS IMÁGENES Y REACT
 import liceo from "../images/liceo1.png"; 
 import React from 'react';
-
+import SEO from '../components/SEO';
 // --- IMPORTACIONES DE SWIPER (CARRUSEL) ---
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, A11y } from 'swiper/modules';
@@ -79,6 +79,11 @@ export default function Inicio({ navegarA, verDetalle }) {
 
   return (
     <div className="animate-fade-in relative">
+      <SEO 
+        title="Inicio" 
+        description="Colegio Liceo Formador de Exploradores. Educación preescolar y primaria de calidad. Ubicados en Dg. 62 # 45-30, Barrancabermeja"
+        keywords="colegio barrancabermeja, preescolar, primaria, matriculas 2026, mejor colegio barrio las granjas, liceo formador, liceo, formador, exploradores, liceo formador de exploradores, colegio liceo."
+      />
 
       {/* WIDGET FLOTANTE DE REDES SOCIALES */}
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end animate-fade-in">
