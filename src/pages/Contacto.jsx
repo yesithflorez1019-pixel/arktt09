@@ -78,8 +78,8 @@ export default function Contacto() {
               <h3 className="font-bold text-slate-800 text-lg mb-2">Atención al Público</h3>
               <p className="text-slate-600 text-sm mb-4">
                 Lunes a Viernes:<br/>
-                <span className="font-semibold">7:00 AM - 12:00 M</span><br/>
-                <span className="font-semibold">2:00 PM - 5:00 PM</span>
+                <span className="font-semibold">7:00 AM - 1:00 PM</span><br/>
+                
               </p>
               <div className="pt-4 border-t border-slate-100">
                  <div className="flex items-center gap-2 text-cyan-700 font-medium text-sm">
@@ -122,7 +122,7 @@ export default function Contacto() {
                     >
                       <option value="">Selecciona una opción...</option>
                       <option value="Admisiones">Información de Admisiones</option>
-                      <option value="Pagos">Tesorería / Pagos</option>
+                      <option value="Pagos">Pagos</option>
                       <option value="Academico">Coordinación Académica</option>
                       <option value="Otro">Otro motivo</option>
                     </select>
@@ -163,7 +163,7 @@ export default function Contacto() {
                </div>
                
                <iframe 
-                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.957778985671!2d-73.85698592416382!3d7.064132092938356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e42ecac6059d6e7%3A0x867373f7c462796!2sDg.%2062%20%2343-30%2C%20Barrancabermeja%2C%20Santander!5e0!3m2!1ses!2sco!4v1709400000000!5m2!1ses!2sco" 
+                 src="https://www.google.com/maps?q=7.071778,-73.831306&hl=es&z=17&output=embed" 
                  width="100%" 
                  height="100%" 
                  style={{border:0}} 

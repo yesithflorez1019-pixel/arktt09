@@ -15,7 +15,7 @@ export default function Admisiones({ navegarA }) {
           <ArrowLeft size={20} /> Volver al Inicio
         </button>
 
-        <TituloSeccion titulo="Proceso de Admisión 2025" subtitulo="Únete al Liceo Formador de Exploradores." />
+        <TituloSeccion titulo="Proceso de Admisión 2026" subtitulo="Únete al Liceo Formador de Exploradores." />
 
         <div className="grid md:grid-cols-2 gap-12">
           

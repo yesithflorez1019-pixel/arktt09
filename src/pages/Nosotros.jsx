@@ -38,11 +38,12 @@ export default function Nosotros() {
               </h2>
               <div className="space-y-4 text-lg text-slate-600 leading-relaxed text-justify">
                  <p>
-                    Todo comenzó en <strong>2016</strong> con el sueño de la Lic. Elizabeth Salgado. Abrimos puertas en 2017 con 65 estudiantes y un corazón lleno de ilusión.
-                 </p>
+                    Todo comenzó en <strong>2016</strong> con un gran sueño y un corazón lleno de ilusión. En 2017 abrimos nuestras puertas con 65 estudiantes.
+                    </p>
                  <p>
-                    Para el <strong>2020</strong>, gracias al apoyo de las familias, ampliamos a la Básica Primaria. Hoy, bajo la Resolución 1504, somos un referente de calidad humana y académica en el Barrio Las Granjas.
-                 </p>
+                    Para el <strong>2020</strong>, gracias al apoyo de las familias, ampliamos nuestra oferta a la Básica Primaria. Hoy, bajo la Resolución 1504, somos un referente de calidad humana y académica en el barrio Las Granjas.
+              
+              </p>
               </div>
            </div>
         </div>

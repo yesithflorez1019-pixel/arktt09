@@ -12,7 +12,6 @@ export default function Pagos({ navegarA }) {
   
   // DATOS PRINCIPALES
   const datosPago = {
-    nombre: "Elizabeth Salgado Bautista",
     alias: "@ES1096193147",
     zona: "Zona Bre-b",
     numeroMovil: "300727447",
@@ -75,15 +74,7 @@ export default function Pagos({ navegarA }) {
                 </h3>
 
                 <div className="space-y-4">
-                   <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl">
-                      <div className="bg-white p-2 rounded-full shadow-sm text-cyan-600">
-                         <User size={20}/>
-                      </div>
-                      <div>
-                         <p className="text-xs text-slate-400 font-bold uppercase">Titular</p>
-                         <p className="font-bold text-slate-800 text-lg">{datosPago.nombre}</p>
-                      </div>
-                   </div>
+                  
 
                    <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
                       <div className="flex items-start gap-4">
@@ -91,7 +82,7 @@ export default function Pagos({ navegarA }) {
                            <Hash size={20}/>
                         </div>
                         <div>
-                           <p className="text-xs text-slate-400 font-bold uppercase">Alias / Código</p>
+                           <p className="text-xs text-slate-400 font-bold uppercase">Llave</p>
                            <p className="font-mono font-bold text-slate-800 text-lg tracking-wider">{datosPago.alias}</p>
                         </div>
                       </div>

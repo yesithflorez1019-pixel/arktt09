@@ -2,12 +2,12 @@ import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
 export default function TopBar() {
-  // Enlace exacto proporcionado (short link de Google Maps)
+
   const googleMapsLink = "https://maps.app.goo.gl/34E1fQJKzC72Rewc7";
   const plataformaLink = "https://e.plataformaintegra.net/liceoexploradores/";
 
   return (
-    <div className="bg-slate-900 text-slate-300 text-xs py-2 hidden md:block border-b border-slate-800">
+    <div className="bg-slate-900 text-slate-300 text-xs py-3 hidden md:block border-b border-slate-800">
       <div className="container mx-auto px-6 flex justify-between items-center">
         <div className="flex gap-6">
           <a href="tel:3005537195" className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors">

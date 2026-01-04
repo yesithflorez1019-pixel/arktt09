@@ -21,7 +21,7 @@ export default function Navbar({ navegarA, paginaActual }) {
     <header className="sticky top-0 z-50 w-full">
       {/* Fondo blanco sólido para que se vea serio y limpio */}
       <div className="bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100">
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div className="container mx-auto px-1 py-3 flex justify-between items-center">
           
           {/* LOGOTIPO */}
             <div
@@ -43,7 +43,7 @@ export default function Navbar({ navegarA, paginaActual }) {
               <button 
                 key={link.id} 
                 onClick={() => manejarClick(link.id)}
-                className={`px-4 py-2 rounded-md text-sm font-bold transition-all duration-300 border-b-2 ${
+                className={`px-5 py-3 rounded-md text-base md:text-lg font-bold transition-all duration-300 border-b-2 ${
                   paginaActual === link.id 
                     ? 'text-cyan-700 border-cyan-500 bg-cyan-50' 
                     : 'text-slate-600 border-transparent hover:text-cyan-600 hover:bg-slate-50'
