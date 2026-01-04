@@ -1,6 +1,6 @@
 import React from 'react';
 import { TituloSeccion } from '../components/UI';
-import { noticiasData } from '../data/noticias'; // Importamos los datos
+import { noticiasData } from '../data/noticias'; 
 import SEO from '../components/SEO';
 
 export default function Noticias({ verDetalle }) {
@@ -39,7 +39,7 @@ export default function Noticias({ verDetalle }) {
                   {item.resumen}
                 </p>
                 <button 
-                  onClick={() => verDetalle(item.id)} // Aquí llamamos a la función para ver detalle
+                  onClick={() => verDetalle(item.id)} 
                   className="text-cyan-600 font-bold text-sm hover:underline mt-auto self-start"
                 >
                   Leer noticia completa &rarr;

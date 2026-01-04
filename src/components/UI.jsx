@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Título con estilo institucional pero moderno
+// Título 
 export const TituloSeccion = ({ titulo, subtitulo, alineacion = 'center' }) => (
   <div className={`mb-12 text-${alineacion} relative z-10`}>
     <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 uppercase tracking-tight">{titulo}</h2>
@@ -9,14 +9,14 @@ export const TituloSeccion = ({ titulo, subtitulo, alineacion = 'center' }) => (
   </div>
 );
 
-// Tarjeta base con efecto cristal
+// Tarjeta base 
 export const TarjetaCristal = ({ children, className = "" }) => (
   <div className={`bg-white/70 backdrop-blur-md border border-white/60 shadow-lg rounded-xl ${className}`}>
     {children}
   </div>
 );
 
-// Tarjeta de Noticias (Tipo Blog)
+// Tarjeta de Noticias
 export const TarjetaNoticia = ({ imagen, fecha, titulo, resumen }) => (
   <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-slate-100 group">
     <div className="h-48 overflow-hidden relative">

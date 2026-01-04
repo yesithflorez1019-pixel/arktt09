@@ -1,23 +1,16 @@
-// 1. IMPORTAMOS LAS IMÁGENES Y REACT
 import liceo from "../images/liceo1.png"; 
 import React from 'react';
 import SEO from '../components/SEO';
-// --- IMPORTACIONES DE SWIPER (CARRUSEL) ---
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, A11y } from 'swiper/modules';
-// Importamos los estilos de Swiper obligatorios
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-// --- IMPORTACIONES DE ICONOS Y COMPONENTES UI ---
 import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, CreditCard } from 'lucide-react';
 import { TituloSeccion, TarjetaCristal } from '../components/UI';
-
-// 2. IMPORTAMOS LOS DATOS DE NOTICIAS
 import { noticiasData } from '../data/noticias'; 
 
-// --- COMPONENTE ICONO TIKTOK ---
+
 const IconoTikTok = ({ size = 20, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
@@ -26,7 +19,7 @@ const IconoTikTok = ({ size = 20, className = "" }) => (
 
 export default function Inicio({ navegarA, verDetalle }) {
   
-  // ... Lógica de noticias ...
+  //logica de noticias// 
   const noticiasSeguras = noticiasData || [];
   const obtenerValorFecha = (fechaStr) => {
     const meses = {
@@ -70,9 +63,9 @@ export default function Inicio({ navegarA, verDetalle }) {
     { 
       titulo: "Pagos en Línea", 
       descripcion: "PSE y Matrículas", 
-      imagen: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80", // La imagen pequeña para la tarjeta
+      imagen: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80", 
       icono: CreditCard,
-      accion: () => navegarA('pagos') // <--- CAMBIO AQUÍ: Ahora lleva a la página completa
+      accion: () => navegarA('pagos') 
     }
 
   ];
@@ -81,11 +74,11 @@ export default function Inicio({ navegarA, verDetalle }) {
     <div className="animate-fade-in relative">
       <SEO 
         title="Inicio" 
-        description="Colegio Liceo Formador de Exploradores. Educación preescolar y primaria de calidad. Ubicados en Dg. 62 # 45-30, Barrancabermeja"
-        keywords="colegio barrancabermeja, preescolar, primaria, matriculas 2026, mejor colegio barrio las granjas, liceo formador, liceo, formador, exploradores, liceo formador de exploradores, colegio liceo."
+        description="Liceo Formador de Exploradores: El mejor colegio preescolar y primaria en Barrancabermeja. Educación integral, innovadora y valores. ¡Matrículas Abiertas!"
+        keywords="Liceo Formador de Exploradores, colegio barrancabermeja, colegio .edu, mejor preescolar santander, matriculas 2026, educacion primaria"
       />
 
-      {/* WIDGET FLOTANTE DE REDES SOCIALES */}
+      {/* widget de redes */}
       <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end animate-fade-in">
         <div className="bg-cyan-600 text-white text-[10px] font-bold py-3 px-1 rounded-l-md shadow-lg mb-1 cursor-default" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
            SÍGUENOS
@@ -128,7 +121,7 @@ export default function Inicio({ navegarA, verDetalle }) {
                <div className="absolute inset-0 bg-black/40"></div>
             </div>
 
-            {/* 2. VIDEO PRINCIPAL:  */}
+            {/* video principal */}
             <div className="relative z-10 h-full w-full flex items-center justify-center p-4 md:p-8">
                 <video 
                   src="/fotos-inicio/inicio.mp4"
@@ -146,7 +139,7 @@ export default function Inicio({ navegarA, verDetalle }) {
             </div>
           </SwiperSlide>
 
-          {/* --- DIAPOSITIVA 2: IMAGEN ORIGINAL --- */}
+          {/* diapositiva 2 */}
           <SwiperSlide className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 to-transparent z-10"></div>
             <img src={liceo} alt="Fachada Colegio" className="w-full h-full object-cover object-top" />
@@ -197,10 +190,10 @@ export default function Inicio({ navegarA, verDetalle }) {
           }
         `}</style>
       </section>
-      {/* ================================================================== */}
+      
 
 
-       {/* ACCESOS RÁPIDOS */}
+       {/* accesos rapidos */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -255,13 +248,13 @@ export default function Inicio({ navegarA, verDetalle }) {
         </div>
       </section>
 
-      {/* SEDE */}
+      {/* Sede */}
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6">
           <TituloSeccion titulo="Nuestra Sede" />
           
           <div className="max-w-5xl mx-auto"> 
-             {/* Tarjeta Única Grande */}
+             {/* tarjeta grande*/}
              <TarjetaCristal className="flex flex-col md:flex-row overflow-hidden group shadow-xl">
                 
                 {/* Imagen Sede */}
@@ -271,7 +264,7 @@ export default function Inicio({ navegarA, verDetalle }) {
                   </div>
                 </div>
 
-                {/* Información */}
+                {/* informacion */}
                 <div className="p-8 md:w-1/2 flex flex-col justify-center">
                   <h3 className="font-bold text-2xl text-slate-800 mb-2">Sede Única Integral</h3>
                   <p className="text-sm text-slate-500 mb-6 leading-relaxed">
@@ -300,7 +293,7 @@ export default function Inicio({ navegarA, verDetalle }) {
                     </div>
                   </div>
 
-                  {/* BOTÓN CON UBICACIÓN DE GOOGLE MAPS */}
+                  {/* ubi google maps */}
                   <button 
                     onClick={() => window.open('https://maps.app.goo.gl/34E1fQJKzC72Rewc7', '_blank')}
                     className="mt-8 text-cyan-600 font-bold text-sm uppercase tracking-wide hover:underline text-left flex items-center gap-2"

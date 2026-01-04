@@ -13,8 +13,7 @@ import { TituloSeccion } from '../components/UI';
 import SEO from '../components/SEO';
 
 export default function Calendario({ navegarA }) {
-  // Estado para saber qué mes está viendo el usuario (0 = Enero, 11 = Diciembre)
-  // Iniciamos en Febrero (1) que es cuando suelen entrar a clases, o Enero (0).
+
   const [mesSeleccionado, setMesSeleccionado] = useState(0);
 
   const meses = [
@@ -22,8 +21,7 @@ export default function Calendario({ navegarA }) {
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
 
-  // Datos de ejemplo para 2026
-  // mesIndex: 0 es Enero, 1 es Febrero, etc.
+
   const todosLosEventos = [
    // { id: 1, mesIndex: 0, dia: "20", titulo: "Inicio Labores Administrativas", hora: "7:00 AM", lugar: "Secretaría", tipo: "admin" },
     //{ id: 2, mesIndex: 1, dia: "03", titulo: "Inicio de Clases 2026", hora: "6:45 AM", lugar: "Sede Principal", tipo: "academico" },
@@ -41,7 +39,7 @@ export default function Calendario({ navegarA }) {
   // Filtramos los eventos según el mes que el usuario seleccionó
   const eventosDelMes = todosLosEventos.filter(e => e.mesIndex === mesSeleccionado);
 
-  // Función auxiliar para elegir el icono según el tipo de evento
+  //  auxiliar para elegir el icono 
   const getIcono = (tipo) => {
     switch(tipo) {
       case 'academico': return <BookOpen size={20} className="text-blue-500" />;
@@ -66,10 +64,10 @@ export default function Calendario({ navegarA }) {
           subtitulo="Selecciona un mes para ver las actividades programadas." 
         />
 
-        {/* --- COMPONENTE INTERACTIVO --- */}
+
         <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
           
-          {/* 1. BARRA LATERAL DE MESES (O SUPERIOR EN MÓVIL) */}
+          {/* barra superior movil */}
           <div className="lg:w-1/4">
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-2 grid grid-cols-3 lg:grid-cols-1 gap-1">
               {meses.map((mes, index) => (
@@ -89,7 +87,7 @@ export default function Calendario({ navegarA }) {
             </div>
           </div>
 
-          {/* 2. AREA DE CONTENIDO (TARJETAS) */}
+          {/* tarjetas */}
           <div className="lg:w-3/4">
             <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-8 min-h-[500px] relative overflow-hidden">
               
@@ -134,7 +132,7 @@ export default function Calendario({ navegarA }) {
                     </div>
                   ))
                 ) : (
-                  // ESTADO VACÍO (Cuando no hay eventos en el mes)
+                  // estado vacio //
                   <div className="flex flex-col items-center justify-center h-64 text-center">
                     <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
                       <CalendarIcon size={32} className="text-slate-300" />

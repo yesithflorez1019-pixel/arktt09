@@ -9,7 +9,7 @@ export default function DetalleNoticia({ noticia, volver }) {
     <div className="animate-fade-in py-12 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6 max-w-4xl">
         
-        {/* Botón Volver */}
+        {/* Volver */}
         <button 
           onClick={volver}
           className="flex items-center gap-2 text-cyan-600 font-bold mb-8 hover:-translate-x-1 transition-transform"
@@ -25,6 +25,8 @@ export default function DetalleNoticia({ noticia, volver }) {
             <img 
               src={noticia.imagen} 
               alt={noticia.titulo} 
+              title="imagen de notica"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -34,7 +36,7 @@ export default function DetalleNoticia({ noticia, volver }) {
           </div>
 
           <div className="p-8 md:p-12">
-            {/* Título y Datos */}
+            {/* Titulo y Datos */}
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-6 leading-tight">
               {noticia.titulo}
             </h1>
@@ -44,7 +46,7 @@ export default function DetalleNoticia({ noticia, volver }) {
               <span className="flex items-center gap-2"><User size={16} className="text-cyan-500"/> Administración</span>
             </div>
 
-            {/* Texto Completo (respeta los párrafos) */}
+            {/* Texto Completo  */}
             <div className="prose prose-lg text-slate-600 leading-relaxed whitespace-pre-line">
               {noticia.contenido}
             </div>
