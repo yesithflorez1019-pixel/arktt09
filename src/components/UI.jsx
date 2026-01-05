@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 // Título 
 export const TituloSeccion = ({ titulo, subtitulo, alineacion = 'center' }) => (
   <div className={`mb-12 text-${alineacion} relative z-10`}>

@@ -11,8 +11,10 @@ import {
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
 import SEO from '../components/SEO';
+import { useNavigate } from 'react-router-dom';
 
-export default function Calendario({ navegarA }) {
+export default function Calendario() {
+  const navigate = useNavigate();
 
   const [mesSeleccionado, setMesSeleccionado] = useState(0);
 
@@ -151,7 +153,7 @@ export default function Calendario({ navegarA }) {
         </div>
 
         <div className="text-center mt-12">
-            <button onClick={() => navegarA('inicio')} className="text-cyan-600 font-bold hover:underline">
+            <button onClick={() => navigate('/')} className="text-cyan-600 font-bold hover:underline">
                Volver al Inicio
             </button>
         </div>

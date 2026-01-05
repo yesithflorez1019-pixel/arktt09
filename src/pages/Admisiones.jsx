@@ -1,15 +1,17 @@
 import React from 'react';
 import { CheckCircle, FileText, Download, ArrowLeft } from 'lucide-react';
 import { TituloSeccion, TarjetaCristal } from '../components/UI';
+import { useNavigate } from 'react-router-dom';
 
-export default function Admisiones({ navegarA }) {
+export default function Admisiones() {
+  const navigate = useNavigate();
   return (
     <div className="animate-fade-in pt-12 pb-20 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6 max-w-5xl">
         
         {/* Volver */}
         <button
-          onClick={() => navegarA('inicio')}
+          onClick={() => navigate('/')}
           className="flex items-center gap-2 text-cyan-600 font-bold mb-8 hover:-translate-x-1 transition-transform"
         >
           <ArrowLeft size={20} /> Volver al Inicio

@@ -9,6 +9,7 @@ import 'swiper/css/pagination';
 import { Monitor, FileText, Users, Calendar, ArrowRight, CheckCircle, Facebook, Instagram, CreditCard } from 'lucide-react';
 import { TituloSeccion, TarjetaCristal } from '../components/UI';
 import { noticiasData } from '../data/noticias'; 
+import { useNavigate } from 'react-router-dom';
 
 
 const IconoTikTok = ({ size = 20, className = "" }) => (
@@ -17,7 +18,8 @@ const IconoTikTok = ({ size = 20, className = "" }) => (
   </svg>
 );
 
-export default function Inicio({ navegarA, verDetalle }) {
+export default function Inicio() {
+  const navigate = useNavigate();
   
   //logica de noticias// 
   const noticiasSeguras = noticiasData || [];
@@ -51,21 +53,22 @@ export default function Inicio({ navegarA, verDetalle }) {
       descripcion: "Requisitos y fechas", 
       imagen: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80",
       icono: FileText,
-      accion: () => navegarA('admisiones')
+      accion: () => navigate('/admisiones')
+
     },
     { 
       titulo: "Calendario", 
       descripcion: "Cronograma 2026",
       imagen: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80",
       icono: Calendar,
-      accion: () => navegarA('calendario')
+      accion: () => navigate('/calendario')
     },
     { 
       titulo: "Pagos en Línea", 
       descripcion: "PSE y Matrículas", 
       imagen: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80", 
       icono: CreditCard,
-      accion: () => navegarA('pagos') 
+      accion: () => navigate('/pagos')
     }
 
   ];
@@ -221,7 +224,7 @@ export default function Inicio({ navegarA, verDetalle }) {
                <h2 className="text-3xl font-bold text-slate-800 uppercase tracking-tight">Actualidad Institucional</h2>
                <div className="h-1.5 w-24 bg-cyan-500 rounded-full mt-4 shadow-sm"></div>
              </div>
-             <button onClick={() => navegarA('noticias')} className="hidden md:flex items-center gap-2 text-cyan-600 font-bold hover:translate-x-1 transition-transform">
+             <button onClick={() => navigate('/noticias')} className="hidden md:flex items-center gap-2 text-cyan-600 font-bold hover:translate-x-1 transition-transform">
                Ver todas las noticias <ArrowRight size={20}/>
              </button>
           </div>

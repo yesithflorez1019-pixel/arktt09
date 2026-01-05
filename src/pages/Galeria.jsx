@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
 import SEO from '../components/SEO';
+import { useNavigate } from 'react-router-dom';
 
 const galeriaEventos = [
   {

@@ -1,0 +1,31 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://liceoformadordeexploradores.edu.co/</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>1.00</priority>
+   </url>
+   
+   <url>
+      <loc>https://liceoformadordeexploradores.edu.co/pagos</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.90</priority>
+   </url>
+
+   <url>
+      <loc>https://liceoformadordeexploradores.edu.co/nosotros</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.80</priority>
+   </url>
+
+   <url>
+      <loc>https://liceoformadordeexploradores.edu.co/admisiones</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.80</priority>
+   </url>
+
+   <url>
+      <loc>https://liceoformadordeexploradores.edu.co/contacto</loc>
+      <lastmod>2026-01-04</lastmod>
+      <priority>0.70</priority>
+   </url>
+</urlset>

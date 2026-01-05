@@ -16,8 +16,11 @@ import {
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
 import SEO from '../components/SEO';
+import { useNavigate } from 'react-router-dom';
 
-export default function Pagos({ navegarA }) {
+export default function Pagos() {
+  const navigate = useNavigate();
+
   const [copiado, setCopiado] = useState(false);
   const [copiadoAlias, setCopiadoAlias] = useState(false);
   const [copiadoConvEfecty, setCopiadoConvEfecty] = useState(false);
@@ -65,7 +68,7 @@ export default function Pagos({ navegarA }) {
       <div className="container mx-auto px-6">
         {/* Volver */}
         <button
-          onClick={() => navegarA('inicio')}
+          onClick={() => navigate('/')}
           className="mb-6 flex items-center gap-2 text-slate-500 hover:text-cyan-600 font-bold transition-colors"
         >
           <ArrowLeft size={20} />

@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import logoLiceo from "../images/logo_nombre.png";
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
+import logoLiceo from '../images/logo_nombre.png'
 
-export default function Navbar({ navegarA, paginaActual }) {
-  const [menuAbierto, setMenuAbierto] = useState(false);
+export default function Navbar() {
+  const [menuAbierto, setMenuAbierto] = useState(false)
 
   const enlacesMenu = [
-    { id: 'inicio', etiqueta: 'INICIO' },
-    { id: 'nosotros', etiqueta: 'NOSOTROS' },
-    { id: 'galeria', etiqueta: 'GALERÍA' },
-    { id: 'contacto', etiqueta: 'CONTACTO' },
-  ];
+    { to: '/', etiqueta: 'INICIO' },
+    { to: '/nosotros', etiqueta: 'NOSOTROS' },
+    { to: '/galeria', etiqueta: 'GALERÍA' },
+    { to: '/contacto', etiqueta: 'CONTACTO' },
+  ]
 
-  const manejarClick = (id) => {
-    navegarA(id);
-    setMenuAbierto(false);
-  };
+  const cerrarMenu = () => setMenuAbierto(false)
+
+  const clasesLink = ({ isActive }) =>
+    `px-5 py-3 rounded-md font-bold transition-all border-b-2 ${
+      isActive
+        ? 'text-cyan-700 border-cyan-500 bg-cyan-50'
+        : 'text-slate-600 border-transparent hover:text-cyan-600 hover:bg-slate-50'
+    }`
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -23,31 +28,29 @@ export default function Navbar({ navegarA, paginaActual }) {
         <div className="container mx-auto px-1 py-3 flex justify-between items-center">
           
           {/* Logo */}
-          <div
-            className="flex items-center gap-3 cursor-pointer"
-            onClick={() => manejarClick('inicio')}
+          <NavLink
+            to="/"
+            onClick={cerrarMenu}
+            className="flex items-center gap-3"
           >
             <img
               src={logoLiceo}
               alt="Liceo - Formador de Exploradores"
               className="h-20 object-contain"
             />
-          </div>
+          </NavLink>
 
           {/* Menú escritorio */}
           <nav className="hidden md:flex items-center gap-1">
             {enlacesMenu.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => manejarClick(link.id)}
-                className={`px-5 py-3 rounded-md font-bold transition-all border-b-2 ${
-                  paginaActual === link.id
-                    ? 'text-cyan-700 border-cyan-500 bg-cyan-50'
-                    : 'text-slate-600 border-transparent hover:text-cyan-600 hover:bg-slate-50'
-                }`}
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={clasesLink}
+                onClick={cerrarMenu}
               >
                 {link.etiqueta}
-              </button>
+              </NavLink>
             ))}
           </nav>
 
@@ -60,21 +63,28 @@ export default function Navbar({ navegarA, paginaActual }) {
           </button>
         </div>
 
-        {/* Menú móvil desplegable */}
+        {/* Menú móvil */}
         {menuAbierto && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl flex flex-col">
             {enlacesMenu.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => manejarClick(link.id)}
-                className="py-4 px-6 text-left font-bold text-slate-700 border-b border-slate-50 hover:bg-slate-50 hover:text-cyan-600"
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={cerrarMenu}
+                className={({ isActive }) =>
+                  `py-4 px-6 text-left font-bold border-b border-slate-50 ${
+                    isActive
+                      ? 'text-cyan-700 bg-cyan-50'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-cyan-600'
+                  }`
+                }
               >
                 {link.etiqueta}
-              </button>
+              </NavLink>
             ))}
           </div>
         )}
       </div>
     </header>
-  );
+  )
 }

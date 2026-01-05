@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://liceoformadordeexploradores.edu.co/sitemap.xml

@@ -9,6 +9,9 @@ import {
   Smartphone,
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function Contacto() {
   const [formData, setFormData] = useState({

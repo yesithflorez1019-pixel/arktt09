@@ -2,8 +2,10 @@ import React from 'react';
 import { TituloSeccion } from '../components/UI';
 import { noticiasData } from '../data/noticias'; 
 import SEO from '../components/SEO';
+import { useNavigate } from 'react-router-dom';
 
-export default function Noticias({ verDetalle }) {
+export default function Noticias() {
+  const navigate = useNavigate();
   return (
     <div className="animate-fade-in pt-12 pb-20 bg-slate-50 min-h-screen">
       <SEO 
@@ -39,7 +41,7 @@ export default function Noticias({ verDetalle }) {
                   {item.resumen}
                 </p>
                 <button 
-                  onClick={() => verDetalle(item.id)} 
+                  onClick={() => navigate(`/noticias/${item.id}`)}
                   className="text-cyan-600 font-bold text-sm hover:underline mt-auto self-start"
                 >
                   Leer noticia completa &rarr;

@@ -9,7 +9,7 @@ import {
   Heart,
   Eye
 } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo_nombre.png';
 
 // Icono TikTok
