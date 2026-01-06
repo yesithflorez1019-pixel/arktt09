@@ -2,13 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-
-  background-color: #38bdf8; 
-  color: white; 
+:root {
+  /* Forzamos que el scroll sea suave */
+  scroll-behavior: smooth;
 }
 
-/* Scrollbar para que combine */
+body {
+  /* Usamos un gris muy suave de fondo para que no canse la vista */
+  background-color: #f8fafc; 
+  color: #334155; /* Texto gris oscuro, no negro puro */
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar personalizada pero sutil */
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #38bdf8; }
-::-webkit-scrollbar-thumb { background: #0c4a6e; border-radius: 5px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { 
+  background: #cbd5e1; 
+  border-radius: 5px; 
+  border: 2px solid #f1f5f9;
+}
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
