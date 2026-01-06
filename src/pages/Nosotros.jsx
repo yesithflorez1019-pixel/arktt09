@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Nosotros() {
   return (
-    <div className="animate-fade-in bg-white min-h-screen font-sans text-slate-700">
+    <div className="animate-fade-in bg-celeste-400 min-h-screen font-sans text-slate-700">
       <SEO
         title="Quiénes Somos - Pioneros en Energía Solar"
         description="Conoce la historia del Liceo Formador de Exploradores. Somos pioneros en Barrancabermeja con nuestro sistema de energía solar y modelo pedagógico innovador."
@@ -29,14 +29,16 @@ export default function Nosotros() {
       />
 
       {/* Header */}
-      <div className="relative pt-24 pb-20 text-center px-6 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
-            "Observando e indagando <br />
-            <span className="text-cyan-600">los exploradores</span> se van formando"
-          </h1>
-        </div>
-      </div>
+      <section className="bg-celeste-400 py-24 px-6 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-black text-white max-w-4xl mx-auto leading-tight">
+              "Observando e indagando <br />
+              <span className="text-cyan-900">los exploradores</span> se van formando"
+            </h1>
+          </div>
+        </section>
+
+
 
       {/* Historia */}
       <section className="py-20 container mx-auto px-6">
@@ -69,7 +71,7 @@ export default function Nosotros() {
       </section>
 
       {/* Energía solar */}
-      <section className="py-20 bg-green-50/50">
+      <section className="py-20 bg-celeste-400">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
@@ -145,7 +147,7 @@ export default function Nosotros() {
       </section>
 
       {/* Principios */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-celeste-400">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-800">Principios de Formación</h2>

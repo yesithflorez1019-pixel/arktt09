@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 export default function SEO({ title, description, keywords }) {
-  const nombreColegio = "Liceo Formador de Exploradores";
+  const nombreColegio = "LICEO FORMADOR DE EXPLORADORES";
   const tituloCompleto = `${title} | ${nombreColegio}`;
 
   return (

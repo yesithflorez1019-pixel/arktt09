@@ -1,10 +1,12 @@
 import React, { Suspense, lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-
+import Login from './pages/Login';
+import AdminPanel from './pages/AdminPanel';
+import RutaProtegida from './components/RutaProtegida';
 import TopBar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import { noticiasData } from './data/noticias'
+
 
 // Lazy loading de páginas
 const Inicio = lazy(() => import('./pages/Inicio'))
@@ -33,13 +35,22 @@ export default function App() {
       <main className="flex-grow">
         <Suspense fallback={<Cargando />}>
           <Routes>
+
+            <Route path="/login" element={<Login />} />
+
+              <Route 
+                path="/admin" 
+                element={
+                  <RutaProtegida>
+                    <AdminPanel />
+                  </RutaProtegida>
+                } 
+              />
+
             <Route path="/" element={<Inicio />} />
 
             <Route path="/noticias" element={<Noticias />} />
-            <Route
-              path="/noticias/:id"
-              element={<DetalleNoticia noticias={noticiasData} />}
-            />
+            <Route path="/noticias/:id" element={<DetalleNoticia />} />
 
             <Route path="/admisiones" element={<Admisiones />} />
             <Route path="/galeria" element={<Galeria />} />

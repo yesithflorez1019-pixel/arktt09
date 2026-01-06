@@ -25,7 +25,7 @@ export default function Calendario() {
 
 
   const todosLosEventos = [
-   // { id: 1, mesIndex: 0, dia: "20", titulo: "Inicio Labores Administrativas", hora: "7:00 AM", lugar: "Secretaría", tipo: "admin" },
+    //{ id: 1, mesIndex: 0, dia: "20", titulo: "Inicio Labores Administrativas", hora: "7:00 AM", lugar: "Secretaría", tipo: "admin" },
     //{ id: 2, mesIndex: 1, dia: "03", titulo: "Inicio de Clases 2026", hora: "6:45 AM", lugar: "Sede Principal", tipo: "academico" },
    // { id: 3, mesIndex: 1, dia: "14", titulo: "Celebración San Valentín", hora: "10:00 AM", lugar: "Patio Central", tipo: "cultural" },
     //{ id: 4, mesIndex: 2, dia: "08", titulo: "Día de la Mujer", hora: "Izada de Bandera", lugar: "Auditorio", tipo: "cultural" },

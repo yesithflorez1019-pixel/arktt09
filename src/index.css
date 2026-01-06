@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+
+  background-color: #38bdf8; 
+  color: white; 
+}
+
+/* Scrollbar para que combine */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #38bdf8; }
+::-webkit-scrollbar-thumb { background: #0c4a6e; border-radius: 5px; }

@@ -33,13 +33,13 @@ export default function Contacto() {
   };
 
   return (
-    <div className="animate-fade-in bg-slate-50 min-h-screen pt-10 pb-20">
+    <div className="animate-fade-in bg-celeste-400 min-h-screen pt-10 pb-20">
       
       {/* Cabecera */}
       <div className="container mx-auto px-6 mb-12 text-center">
         <TituloSeccion
           titulo="Contáctanos"
-          subtitulo="Estamos listos para atenderte y resolver tus inquietudes."
+          subtitulo3="Estamos listos para atenderte y resolver tus inquietudes."
         />
       </div>
 

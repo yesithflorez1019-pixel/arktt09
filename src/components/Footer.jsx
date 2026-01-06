@@ -63,7 +63,7 @@ export default function Footer({ navegarA }) {
   ];
 
   return (
-    <footer className="bg-slate-900 text-slate-300 border-t border-slate-800 font-sans">
+    <footer className="bg-slate-900 text-celeste-300 border-t border-celeste-800 font-sans">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="space-y-4">
@@ -76,7 +76,7 @@ export default function Footer({ navegarA }) {
 
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Navegación</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm text-slate-300">
               {['inicio', 'admisiones', 'noticias', 'calendario'].map(item => (
                 <li key={item}>
                   <button
@@ -94,7 +94,7 @@ export default function Footer({ navegarA }) {
 
           <div>
             <h3 className="text-white font-bold text-lg mb-4">Contáctanos</h3>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-4 text-sm text-slate-300">
               <li className="flex gap-3">
                 <MapPin size={18} className="text-cyan-500 mt-1" />
                 <span>Dg. 62 #45-30<br />Barrancabermeja, Santander</span>

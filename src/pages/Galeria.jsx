@@ -48,7 +48,7 @@ export default function Galeria() {
   };
 
   return (
-    <div className="animate-fade-in pt-12 pb-20 bg-slate-50 min-h-screen">
+    <div className="animate-fade-in pt-12 pb-20 bg-celeste-400 min-h-screen">
       <SEO
         title="Galería"
         description="Explora nuestras actividades, eventos y los mejores momentos de nuestros exploradores."
@@ -56,7 +56,7 @@ export default function Galeria() {
       />
 
       <div className="container mx-auto px-6">
-
+        
         {!eventoActivo ? (
           <>
             {/* Listado de álbumes */}
@@ -65,18 +65,30 @@ export default function Galeria() {
               subtitulo="Revive los mejores momentos"
             />
 
-            <div className="flex justify-between items-center mb-8 border-b border-slate-200 pb-4">
+            <div className="flex justify-between items-center mb-8 border-b border-black/30 pb-4">
               <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                 <Grid className="w-5 h-5 text-cyan-500" />
                 Álbumes disponibles
               </h2>
-              <span className="text-sm text-slate-400 font-medium bg-slate-100 px-3 py-1 rounded-full">
+              <span className="text-sm text-slate-600 font-medium bg-slate-100 px-3 py-1 rounded-full">
                 {galeriaEventos.length} eventos
               </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              
               {galeriaEventos.map((evento) => (
+                <div className="
+                  bg-slate-200
+                  rounded-xl
+                  shadow-md
+                  px-6 py-8
+                  md:px-3 md:py-3
+                  max-w-12xl
+                
+                  border border-white/70
+                  ring-1 ring-black/5
+                      ">
                 <div
                   key={evento.id}
                   onClick={() => abrirEvento(evento)}
@@ -110,6 +122,7 @@ export default function Galeria() {
                       Ver fotos <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
+                </div>
                 </div>
               ))}
             </div>

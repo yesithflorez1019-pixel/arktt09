@@ -18,12 +18,12 @@ export default function Navbar() {
   const clasesLink = ({ isActive }) =>
     `px-5 py-3 rounded-md font-bold transition-all border-b-2 ${
       isActive
-        ? 'text-cyan-700 border-cyan-500 bg-cyan-50'
+        ? 'text-cyan-700 border-cyan-500 bg-cyan-50/40'
         : 'text-slate-600 border-transparent hover:text-cyan-600 hover:bg-slate-50'
     }`
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header className="sticky top-0 z-50 w-full bg-black/100">
       <div className="bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100">
         <div className="container mx-auto px-1 py-3 flex justify-between items-center">
           
