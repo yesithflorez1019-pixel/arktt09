@@ -15,10 +15,12 @@ import {
   Banknote,
 } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
-import SEO from '../components/SEO';
+
 import { useNavigate } from 'react-router-dom';
+import usePageTitle from '../components/usePageTitle';
 
 export default function Pagos() {
+  usePageTitle('Pagos en Línea', 'Portal de pagos seguro. Paga tu pensión por PSE, Efecty o Bancolombia.');
   const navigate = useNavigate();
 
   const [copiado, setCopiado] = useState(false);
@@ -59,11 +61,7 @@ export default function Pagos() {
 
   return (
     <div className="animate-fade-in bg-slate-50 min-h-screen pb-20 pt-10">
-      <SEO
-        title="Pagos en Línea"
-        description="Portal de pagos seguro. Paga tu pensión por PSE, Efecty o Bancolombia."
-        keywords="pagos liceo formador, codigo convenio efecty 934, pagar pension liceo, PSE avalpay center"
-      />
+      
 
       <div className="container mx-auto px-6">
         {/* Volver */}

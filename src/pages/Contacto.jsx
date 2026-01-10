@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, Smartphone, ArrowRight } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
+import usePageTitle from '../components/usePageTitle'
 
 export default function Contacto() {
+  usePageTitle('Contacto', 'Estamos aquí para ayudarte: información de contacto, ubicación y formulario de consulta');
+  
   const [formData, setFormData] = useState({ nombre: '', asunto: '', mensaje: '' });
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });

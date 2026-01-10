@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { TituloSeccion } from '../components/UI';
-// import { noticiasData } from '../data/noticias'; // Ya no usamos datos falsos
-import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
+import usePageTitle from '../components/usePageTitle';
 
 // IMPORTACIONES DE FIREBASE
 import { db } from '../firebase';
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { ArrowLeft } from "lucide-react";
 export default function Noticias() {
+  usePageTitle('Noticias', 'Mantente al día con las últimas actividades y eventos del Liceo Formador de Exploradores.');
   const navigate = useNavigate();
   
   // ESTADOS PARA LOS DATOS REALES
@@ -38,11 +38,7 @@ export default function Noticias() {
 
   return (
     <div className="animate-fade-in pt-12 pb-20 bg-celeste-400 min-h-screen">
-      <SEO 
-        title="Noticias" 
-        description="Mantente al día con las últimas actividades y eventos del Liceo Formador de Exploradores."
-        keywords="noticias colegio, circulares padres de familia, eventos liceo barrancabermeja"
-      />
+      
       
       <div className="container mx-auto px-6">
           <button

@@ -3,6 +3,7 @@ import { Image, Grid, ArrowLeft, Calendar, ArrowRight, ZoomIn } from 'lucide-rea
 import { TituloSeccion } from '../components/UI';
 import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
+import usePageTitle from '../components/usePageTitle';
 
 const galeriaEventos = [
   {
@@ -21,6 +22,7 @@ const galeriaEventos = [
 ];
 
 export default function Galeria() {
+  usePageTitle('Galería', 'Explora nuestros eventos y momentos liceístas.');
   const [eventoActivo, setEventoActivo] = useState(null);
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ export default function Galeria() {
 
   return (
     <div className="animate-fade-in py-12 bg-white min-h-screen">
-      <SEO title="Galería" description="Explora nuestros eventos y momentos liceístas." />
+     
 
       <div className="container mx-auto px-6">
         

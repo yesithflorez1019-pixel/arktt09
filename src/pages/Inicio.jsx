@@ -13,8 +13,9 @@ import 'swiper/css/pagination';
 // FIREBASE
 import { db } from '../firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import usePageMeta from '../components/usePageTitle';
 
-// IMÁGENES (Mantengo las que ya tenías importadas y uso rutas relativas para las nuevas secciones)
+
 import liceoImg from "../images/liceo1.png"; 
 
 const IconoTikTok = ({ size = 20, className = "" }) => (
@@ -23,6 +24,8 @@ const IconoTikTok = ({ size = 20, className = "" }) => (
   </svg>
 );
 export default function Inicio() {
+  usePageMeta('Inicio', 'Bienvenido al Liceo Formador de Exploradores: excelencia académica y formación integral para el futuro de tus hijos.');
+  
   const navigate = useNavigate();
   const [noticiasDestacadas, setNoticiasDestacadas] = useState([]);
 
@@ -84,11 +87,7 @@ export default function Inicio() {
 
   return (
     <div className="font-sans text-slate-800 bg-slate-50 overflow-x-hidden">
-      <SEO 
-        title="Inicio" 
-        description="Liceo Formador de Exploradores: Formación integral en Barrancabermeja."
-        keywords="colegio, preescolar, primaria, barrancabermeja"
-      />
+      
 
         <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end animate-fade-in">
                 <div className="bg-celeste-600 text-white text-[10px] font-bold py-3 px-1 rounded-l-md shadow-lg mb-1 cursor-default" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
@@ -323,7 +322,7 @@ export default function Inicio() {
           8. SECCIÓN "NUESTRA SEDE"
           Estilo: Fondo Azul Institucional + Tarjeta Flotante Slate/White
       =============================================== */}
-      <section className="py-20 bg-celeste-500">
+      <section className="py-20 bg-celeste-400">
         <div className="container mx-auto px-6">
           
           {/* Tarjeta Flotante */}

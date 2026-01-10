@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/admin'); // Si todo sale bien, nos manda al panel
+      navigate('/admin'); 
     } catch (err) {
       setError('Correo o contraseña incorrectos');
     }

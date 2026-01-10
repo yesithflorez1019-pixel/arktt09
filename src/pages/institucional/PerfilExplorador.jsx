@@ -1,15 +1,14 @@
-import usePageMeta from "../../components/usePageTitle";
-
 import React from 'react';
 import { Seccion, Titulo, TituloSeccion, Tarjeta, TarjetaCristal } from '../../components/UI';
-import SEO from '../../components/SEO';
+import usePageTitle from '../../components/usePageTitle'; // Importamos tu hook nuevo
 import { Compass, BookOpen, Heart, Smile, Lightbulb, Users } from 'lucide-react';
 
 export default function PerfilExplorador() {
-  usePageMeta("Perfil del Explorador", "Conoce las cualidades que formamos en nuestros estudiantes y docentes.");
+  // Usamos tu hook para el título de la pestaña
+  usePageTitle('Perfil del Explorador', 'Características y valores del estudiante en el Liceo Formador');
+
   return (
     <div className="pt-20 bg-celeste-400 min-h-screen animate-fade-in">
-      
       
       {/* SECCIÓN 1: INTRODUCCIÓN */}
       <Seccion>
@@ -66,7 +65,7 @@ export default function PerfilExplorador() {
         </div>
       </Seccion>
 
-      {/* SECCIÓN 3: PERFIL DEL DOCENTE (Fondo Azul) */}
+      {/* SECCIÓN 3: PERFIL DEL DOCENTE (Fondo Azul con Iconos) */}
       <Seccion>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -102,8 +101,8 @@ export default function PerfilExplorador() {
             </div>
           </div>
 
-          {/* Tarjeta decorativa o frase */}
-          <TarjetaCristal className="text-center p-10 transform md:rotate-2 hover:rotate-0 transition-transform duration-500">
+          {/* Tarjeta decorativa */}
+          <TarjetaCristal className="text-center p-10 transform md:rotate-2 hover:rotate-0 transition-transform duration-500 shadow-2xl">
             <h3 className="text-2xl font-black mb-4 italic">"Educar es dejar huella en el corazón de un niño"</h3>
             <p className="opacity-80">— Lema Docente Liceísta</p>
           </TarjetaCristal>

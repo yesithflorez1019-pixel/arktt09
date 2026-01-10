@@ -4,8 +4,12 @@ import { db } from '../firebase'; // Importamos la conexión
 import { doc, getDoc } from 'firebase/firestore'; // Herramientas para leer 1 solo documento
 import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
 import SEO from '../components/SEO';
+import usePageTitle from '../components/usePageTitle';
 
 export default function DetalleNoticia() {
+
+  usePageTitle('Detalle de Noticia', 'Lee la noticia completa y mantente informado sobre las últimas novedades del Liceo Formador.');
+  
   const { id } = useParams(); // Obtenemos el ID de la URL
   const navigate = useNavigate();
   

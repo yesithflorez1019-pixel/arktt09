@@ -1,7 +1,7 @@
 import usePageMeta from "../../components/usePageTitle";
 import React from 'react';
 import { Seccion, Titulo, TarjetaCristal } from '../../components/UI';
-import SEO from '../../components/SEO';
+
 import { Music, Shield, Flag } from 'lucide-react';
 
 export default function Simbolos() {

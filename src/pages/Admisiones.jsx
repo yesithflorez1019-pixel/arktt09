@@ -2,8 +2,11 @@ import React from 'react';
 import { CheckCircle, FileText, Download, ArrowLeft, Calendar, Info } from 'lucide-react';
 import { TituloSeccion } from '../components/UI';
 import { useNavigate } from 'react-router-dom';
+import usePageTitle from '../components/usePageTitle'
 
 export default function Admisiones() {
+  usePageTitle('Admisiones', 'Proceso de admisión y requisitos para nuevos estudiantes'); 
+
   const navigate = useNavigate();
   
   return (
