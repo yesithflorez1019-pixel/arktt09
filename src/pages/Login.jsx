@@ -14,7 +14,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/admin'); 
-    } catch (err) {
+    } catch  {
       setError('Correo o contraseña incorrectos');
     }
   };

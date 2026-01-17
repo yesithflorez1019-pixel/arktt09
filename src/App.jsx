@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import DefaultSEO from './components/DefaultSEO'
 
+
 // Lazy loading de páginas
 const Inicio = lazy(() => import('./pages/Inicio'))
 const Noticias = lazy(() => import('./pages/Noticias'))
@@ -18,13 +19,14 @@ const Galeria = lazy(() => import('./pages/Galeria'))
 const Calendario = lazy(() => import('./pages/Calendario'))
 const Pagos = lazy(() => import('./pages/Pagos'))
 const Contacto = lazy(() => import('./pages/Contacto'))
+const Agenda = lazy(() => import('./pages/Agenda'))
 
 // Páginas institucionales
 const Historia = lazy(() => import('./pages/institucional/Historia'))
 const Simbolos = lazy(() => import('./pages/institucional/Simbolos'))
 const PerfilExplorador = lazy(() => import('./pages/institucional/PerfilExplorador'))
 const Comunidad = lazy(() => import('./pages/institucional/Comunidad'))
-
+const DetalleEvento = lazy(() => import('./pages/DetalleEvento'))
 // Loader elegante
 const Cargando = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
@@ -71,6 +73,8 @@ export default function App() {
             <Route path="/nosotros/comunidad" element={<Comunidad />} />
 
             {/* Otras páginas */}
+            <Route path="/agenda" element={<Agenda />} />
+            <Route path="/agenda/evento/:id" element={<DetalleEvento />} />
             <Route path="/noticias" element={<Noticias />} />
             <Route path="/noticias/:id" element={<DetalleNoticia />} />
             <Route path="/admisiones" element={<Admisiones />} />
