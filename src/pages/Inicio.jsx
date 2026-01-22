@@ -18,8 +18,7 @@ import { Seccion, TituloSeccion, Boton } from '../components/UI';
 import { db } from '../firebase';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 
-// IMÁGENES
-import liceoImg from "../images/liceo1.png"; 
+
 
 const IconoTikTok = ({ size = 20, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -337,7 +336,7 @@ export default function Inicio() {
                   <div className="p-2 bg-celeste-100 text-celeste-600 rounded-full group-hover:bg-celeste-600 group-hover:text-white transition-all"><MapPin size={20} /></div>
                   Ver ubicación en Google Maps
                 </button>
-              </div>
+            </div>
             </div>
           </div>
         </div>

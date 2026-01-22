@@ -94,10 +94,14 @@ export default function Admisiones() {
                 ))}
               </div>
 
-            <button className="w-full mt-6 bg-celeste-600 hover:bg-celeste-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1">
-              <Download size={20} />
-              Descargar Formulario de Inscripción
+            <button 
+            onClick={() => window.open('http://e.plataformaintegra.net/liceoexploradores/index.php/cupo', '_blank')}
+            className="w-full mt-6 bg-celeste-600 hover:bg-celeste-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1">
+              
+              Ingresar a Formulario de Inscripción
+              
             </button>
+            
           </div>
         </div>
       </div>

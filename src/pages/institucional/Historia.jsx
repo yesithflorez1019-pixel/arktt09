@@ -4,8 +4,16 @@ import usePageMeta from "../../components/usePageTitle";
 import React from 'react';
 import { Seccion, Titulo, Tarjeta, TituloSeccion } from '../../components/UI';
 import { Compass, Target, Heart } from 'lucide-react';
+import Mantenimiento from '../../components/Mantenimiento';
 
 export default function Historia() {
+
+  const EN_MANTENIMIENTO = true; 
+
+  if (EN_MANTENIMIENTO) {
+    return <Mantenimiento pagina="nuestra Historia" />;
+  }
+
   usePageMeta("Nuestra Historia", "El origen y rumbo del Liceo Formador");
   return (
     <div className="pt-20 bg-celeste-400 min-h-screen animate-fade-in">

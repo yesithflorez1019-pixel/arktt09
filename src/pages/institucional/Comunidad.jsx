@@ -1,8 +1,20 @@
 import usePageMeta from "../../components/usePageTitle";
 import React from 'react';
 import { Seccion, Titulo, TarjetaCristal } from '../../components/UI';
+import Mantenimiento from '../../components/Mantenimiento';
 
 export default function Comunidad() {
+  
+  const EN_MANTENIMIENTO = true; 
+  
+    if (EN_MANTENIMIENTO) {
+      return <Mantenimiento pagina="Comunidad" />;
+    }
+
+
+
+  
+  
   usePageMeta("Familia Liceísta", "Conoce a las personas que forman parte del Liceo Formador de Exploradores: padres, docentes y estudiantes.");
   return (
     <div className="pt-20 bg-celeste-400 min-h-screen">

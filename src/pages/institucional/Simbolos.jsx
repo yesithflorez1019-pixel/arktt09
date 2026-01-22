@@ -1,10 +1,18 @@
 import usePageMeta from "../../components/usePageTitle";
 import React from 'react';
 import { Seccion, Titulo, TarjetaCristal } from '../../components/UI';
-
+import Mantenimiento from '../../components/Mantenimiento';
 import { Music, Shield, Flag } from 'lucide-react';
 
 export default function Simbolos() {
+
+
+  const EN_MANTENIMIENTO = true; 
+    
+      if (EN_MANTENIMIENTO) {
+        return <Mantenimiento pagina="Simbolos" />;
+      }
+
   usePageMeta("Símbolos Institucionales", "Descubre los símbolos que representan nuestra identidad y valores en el Liceo Formador de Exploradores.");
   return (
     <div className="pt-20 bg-celeste-400 min-h-screen animate-fade-in">

@@ -8,7 +8,7 @@ import TopBar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import DefaultSEO from './components/DefaultSEO'
-
+import ScrollToTop from './components/ScrollToTop'
 
 // Lazy loading de páginas
 const Inicio = lazy(() => import('./pages/Inicio'))
@@ -42,7 +42,8 @@ const Cargando = () => (
 export default function App() {
   return (
     <div className="font-sans text-slate-600 min-h-screen flex flex-col bg-slate-50">
-      
+      <ScrollToTop />
+
       {/* SEO por defecto (Home) */}
       <DefaultSEO />
 

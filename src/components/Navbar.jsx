@@ -6,12 +6,17 @@ import logo from '../images/logo_nombre.png';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
+  
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(false);
     setSubmenuOpen(false);
+    setMobileSubmenuOpen(false);
   }, [location]);
 
   const linkClass =
@@ -27,6 +32,8 @@ export default function Navbar() {
     { nombre: "Familia Liceísta", ruta: "/nosotros/comunidad" },
   ];
 
+  const mobileLinkClass = "w-full text-left p-3 text-gris-texto hover:bg-gray-50 rounded-lg font-medium flex justify-between items-center";
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-suave h-20 flex items-center">
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -40,7 +47,7 @@ export default function Navbar() {
           />
         </div>
 
-        {/* MENÚ DESKTOP */}
+        {/* MENÚ DESKTOP (Pantallas grandes) */}
         <nav className="hidden lg:flex items-center gap-2">
 
           <NavLink to="/" className={({ isActive }) =>
@@ -59,6 +66,7 @@ export default function Navbar() {
               Nosotros <ChevronDown size={14} />
             </button>
 
+            
             <div className={`absolute top-full left-0 w-64 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transition-all
               ${submenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}
             `}>
@@ -99,7 +107,7 @@ export default function Navbar() {
           </NavLink>
         </nav>
 
-        {/* BOTÓN */}
+        {/* BOTÓN PLATAFORMA (Desktop) */}
         <div className="hidden lg:block">
           <a
             href="https://e.plataformaintegra.net/liceoexploradores/"
@@ -111,33 +119,73 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* HAMBURGUESA */}
+        {/* HAMBURGUESA (Móvil) */}
         <button className="lg:hidden text-gris-titulo" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* MENÚ MÓVIL */}
+      {/* MENÚ MÓVIL (Lista corregida) */}
       {isOpen && (
-        <div className="absolute top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl lg:hidden p-4 flex flex-col gap-2 animate-fade-in">
-          <button onClick={() => navigate('/')} className="w-full text-left p-3 font-bold text-celeste-600 bg-celeste-50 rounded-lg">
+        <div className="absolute top-20 left-0 w-full bg-white border-t border-gray-100 shadow-xl lg:hidden p-4 flex flex-col gap-1 animate-fade-in max-h-[85vh] overflow-y-auto">
+          
+          <button onClick={() => navigate('/')} className={mobileLinkClass}>
             Inicio
           </button>
 
-          {menuNosotros.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => navigate(item.ruta)}
-              className="w-full text-left p-3 text-gris-texto hover:bg-gray-50 rounded-lg"
+          {/* ACORDEÓN NOSOTROS */}
+          <div>
+            <button 
+              onClick={() => setMobileSubmenuOpen(!mobileSubmenuOpen)} 
+              className={`${mobileLinkClass} ${mobileSubmenuOpen ? 'text-celeste-600' : ''}`}
             >
-              {item.nombre}
+              Nosotros 
+              <ChevronDown size={18} className={`transition-transform ${mobileSubmenuOpen ? 'rotate-180' : ''}`} />
             </button>
-          ))}
+            
+            {/* Sub-menu items (Indentados) */}
+            {mobileSubmenuOpen && (
+              <div className="pl-4 bg-gray-50 rounded-lg mb-2">
+                {menuNosotros.map((item, i) => (
+                  <button
+                    key={i}
+                    onClick={() => navigate(item.ruta)}
+                    className="w-full text-left p-3 text-sm text-gris-texto hover:text-celeste-600 border-l-2 border-transparent hover:border-celeste-400"
+                  >
+                    {item.nombre}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
-          <button onClick={() => navigate('/contacto')}
-            className="w-full bg-celeste-400 text-white p-3 rounded-lg font-bold mt-2">
-            Contáctanos
+          <button onClick={() => navigate('/admisiones')} className={mobileLinkClass}>
+            Admisiones
           </button>
+
+          <button onClick={() => navigate('/galeria')} className={mobileLinkClass}>
+            Galería
+          </button>
+
+          <button onClick={() => navigate('/noticias')} className={mobileLinkClass}>
+            Noticias
+          </button>
+
+          <button onClick={() => navigate('/contacto')} className={mobileLinkClass}>
+            Contacto
+          </button>
+
+          <div className="mt-4 pt-4 border-t border-gray-100">
+             <a
+              href="https://e.plataformaintegra.net/liceoexploradores/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center bg-celeste-400 hover:bg-celeste-500 text-white p-3 rounded-lg font-bold shadow-md"
+            >
+              Ir a Plataforma
+            </a>
+          </div>
+
         </div>
       )}
     </header>

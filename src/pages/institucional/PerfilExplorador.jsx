@@ -2,8 +2,15 @@ import React from 'react';
 import { Seccion, Titulo, TituloSeccion, Tarjeta, TarjetaCristal } from '../../components/UI';
 import usePageTitle from '../../components/usePageTitle'; // Importamos tu hook nuevo
 import { Compass, BookOpen, Heart, Smile, Lightbulb, Users } from 'lucide-react';
-
+import Mantenimiento from '../../components/Mantenimiento';
 export default function PerfilExplorador() {
+
+  const EN_MANTENIMIENTO = true; 
+    
+      if (EN_MANTENIMIENTO) {
+        return <Mantenimiento pagina="Pefil del Explorador" />;
+      }
+
   // Usamos tu hook para el título de la pestaña
   usePageTitle('Perfil del Explorador', 'Características y valores del estudiante en el Liceo Formador');
 
