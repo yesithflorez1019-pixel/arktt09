@@ -15,11 +15,11 @@ export default function Comunidad() {
 
   
   
-  usePageMeta("Familia Liceísta", "Conoce a las personas que forman parte del Liceo Formador de Exploradores: padres, docentes y estudiantes.");
+  usePageMeta("Familia Exploradora", "Conoce a las personas que forman parte del Liceo Formador de Exploradores: padres, docentes y estudiantes.");
   return (
     <div className="pt-20 bg-celeste-400 min-h-screen">
       <Seccion>
-        <Titulo>Familia Liceísta</Titulo>
+        <Titulo>Familia Exploradora</Titulo>
         <div className="grid md:grid-cols-2 gap-8">
             <TarjetaCristal>
                 <h3 className="text-2xl font-bold mb-4">Escuela de Padres</h3>

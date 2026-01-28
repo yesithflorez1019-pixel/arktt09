@@ -329,7 +329,16 @@ export default function Inicio() {
                 <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-8">
                   <h4 className="font-bold text-celeste-700 flex items-center gap-2 mb-3"><CheckCircle size={18} /> Niveles Educativos</h4>
                   <ul className="grid grid-cols-2 gap-y-2 text-sm text-slate-600 font-medium ml-6">
-                    <li>• Prejardín</li><li>• Grado 1°</li><li>• Jardín</li><li>• Grado 2°</li><li>• Transición</li><li>• Grado 3° a 5°</li>
+                    <li>• Prejardín</li>
+                    <li>• Grado 1°</li>
+                    <li></li>
+                    <li>• Grado 2°</li>
+                    <li>• Jardín</li>
+                    <li>• Grado 3° </li>
+                    <li></li>
+                    <li>• Grado 4°</li>
+                    <li>• Transición</li>
+                    <li>• Grado 5°</li>
                   </ul>
                 </div>
                 <button onClick={() => window.open('https://maps.google.com/?q=Liceo+Formador+de+Exploradores', '_blank')} className="flex items-center gap-2 text-slate-900 font-bold hover:text-celeste-600 transition-colors group">

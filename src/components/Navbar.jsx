@@ -29,7 +29,7 @@ export default function Navbar() {
     { nombre: "Historia y Filosofía", ruta: "/nosotros/historia" },
     { nombre: "Símbolos Institucionales", ruta: "/nosotros/simbolos" },
     { nombre: "Perfil del Explorador", ruta: "/nosotros/perfil" },
-    { nombre: "Familia Liceísta", ruta: "/nosotros/comunidad" },
+    { nombre: "Familia Exploradora", ruta: "/nosotros/comunidad" },
   ];
 
   const mobileLinkClass = "w-full text-left p-3 text-gris-texto hover:bg-gray-50 rounded-lg font-medium flex justify-between items-center";
