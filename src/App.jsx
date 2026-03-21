@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 
 import Login from './pages/Login'
 import AdminPanel from './pages/AdminPanel'
-import RutaProtegida from './components/RutaProtegida'
+import RutaProtegidaConRol from './components/RutaProtegidaConRol'
 import TopBar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -20,6 +20,14 @@ const Calendario = lazy(() => import('./pages/Calendario'))
 const Pagos = lazy(() => import('./pages/Pagos'))
 const Contacto = lazy(() => import('./pages/Contacto'))
 const Agenda = lazy(() => import('./pages/Agenda'))
+
+//juegos
+
+const InicioJuegos = lazy(() => import('./pages/juegos/InicioJuegos'))
+const DocentePanel = lazy(() => import('./pages/juegos/DocentePanel'))
+const LobbyEstudiante = lazy(() => import('./pages/juegos/LobbyEstudiante'))
+
+
 
 // Páginas institucionales
 const Historia = lazy(() => import('./pages/institucional/Historia'))
@@ -61,9 +69,9 @@ export default function App() {
             <Route
               path="/admin"
               element={
-                <RutaProtegida>
+                <RutaProtegidaConRol rol="admin">
                   <AdminPanel />
-                </RutaProtegida>
+                </RutaProtegidaConRol>
               }
             />
 
@@ -83,6 +91,15 @@ export default function App() {
             <Route path="/calendario" element={<Calendario />} />
             <Route path="/pagos" element={<Pagos />} />
             <Route path="/contacto" element={<Contacto />} />
+
+              {/* juegos */}
+            <Route path="/juegos" element={<InicioJuegos />} />
+            <Route path="/juegos/docente" element={
+              <RutaProtegidaConRol rol="docente">
+                <DocentePanel />
+              </RutaProtegidaConRol>
+            } />
+            <Route path="/juegos/sala/:id" element={<LobbyEstudiante />} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

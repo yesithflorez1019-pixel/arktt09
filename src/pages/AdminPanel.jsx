@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Image, FileText, ArrowLeft, Calendar } from 'lucide-react';
+import { LogOut, Image, FileText, ArrowLeft, Calendar, Users } from 'lucide-react'; // Import Users icon
 
-// Importamos los módulos (Asegúrate de que PanelEventos exista ahora)
+// Importamos los módulos
 import PanelNoticias from '../components/admin/PanelNoticias';
 import PanelGaleria from '../components/admin/PanelGaleria';
-import PanelEventos from '../components/admin/PanelEventos'; // <--- NUEVO IMPORT
+import PanelEventos from '../components/admin/PanelEventos';
+import PanelUsuarios from '../components/admin/PanelUsuarios'; // <-- NUEVO IMPORT
 
 export default function AdminPanel() {
   const navigate = useNavigate();
   // Estado para saber qué "pestaña" estamos viendo
-  const [vistaActual, setVistaActual] = useState('dashboard'); // 'dashboard', 'noticias', 'galeria', 'eventos'
+  const [vistaActual, setVistaActual] = useState('dashboard'); // 'dashboard', 'noticias', 'galeria', 'eventos', 'usuarios'
 
   const cerrarSesion = async () => {
     await signOut(auth);
@@ -80,7 +81,7 @@ export default function AdminPanel() {
                 </div>
               </button>
 
-              {/* Botón Eventos (NUEVO) */}
+              {/* Botón Eventos */}
               <button 
                 onClick={() => setVistaActual('eventos')}
                 className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col items-center gap-4 border border-slate-100 group"
@@ -94,18 +95,29 @@ export default function AdminPanel() {
                 </div>
               </button>
 
+              {/* Botón Usuarios (NUEVO) */}
+              <button 
+                onClick={() => setVistaActual('usuarios')}
+                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col items-center gap-4 border border-slate-100 group"
+              >
+                <div className="bg-red-50 p-6 rounded-full text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                  <Users size={48} />
+                </div>
+                <div className="text-center">
+                    <span className="font-bold text-slate-800 text-xl block mb-1">Usuarios</span>
+                    <p className="text-sm text-slate-400">Gestionar Roles</p>
+                </div>
+              </button>
+
             </div>
           </div>
         )}
 
-        {/* VISTA 2: NOTICIAS */}
+        {/* VISTAS ESPECÍFICAS */}
         {vistaActual === 'noticias' && <div className="animate-fade-in"><PanelNoticias /></div>}
-
-        {/* VISTA 3: GALERÍA */}
         {vistaActual === 'galeria' && <div className="animate-fade-in"><PanelGaleria /></div>}
-
-        {/* VISTA 4: EVENTOS (NUEVO) */}
         {vistaActual === 'eventos' && <div className="animate-fade-in"><PanelEventos /></div>}
+        {vistaActual === 'usuarios' && <div className="animate-fade-in"><PanelUsuarios /></div>} {/* <-- NUEVA VISTA */}
 
       </div>
     </div>

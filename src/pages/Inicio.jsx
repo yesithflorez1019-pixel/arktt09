@@ -65,6 +65,16 @@ export default function Inicio() {
 
   // Datos de Accesos Rápidos
   const accesosRapidos = [
+    
+    { 
+      titulo: "Zona de Juegos", // <-- NUEVO BOTÓN
+      descripcion: "Matemáticas e Inglés", 
+      imagen: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&q=80&w=500", // Imagen de juego/aprendizaje
+      icono: Shield, // Icono de juego/entretenimiento
+      accion: () => navigate('/juegos') // Nos lleva al lobby de juegos
+    },
+
+
     { 
       titulo: "Plataforma Notas", 
       descripcion: "Acceso Padres/Alumnos", 
