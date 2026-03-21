@@ -149,7 +149,7 @@ export default function Historia() {
 
               {/* TARJETA VISIÓN  */}
               <div className="bg-celeste-600 rounded-[3rem] p-10 lg:p-14 shadow-xl hover:shadow-2xl transition-shadow text-white flex flex-col h-full relative overflow-hidden">
-                  {/* Decoración de fondo */}
+                  
                   <div className="absolute bottom-0 right-0 w-64 h-64 bg-celeste-500 rounded-tl-full opacity-50"></div>
                   
                   <div className="relative z-10 h-full flex flex-col">
