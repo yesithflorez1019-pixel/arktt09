@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 
 import Login from './pages/Login'
 import AdminPanel from './pages/AdminPanel'
-import RutaProtegidaConRol from './components/RutaProtegidaConRol'
+import RutaProtegida from './components/RutaProtegida'
 import TopBar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -69,9 +69,9 @@ export default function App() {
             <Route
               path="/admin"
               element={
-                <RutaProtegidaConRol rol="admin">
+                <RutaProtegida>
                   <AdminPanel />
-                </RutaProtegidaConRol>
+                </RutaProtegida>
               }
             />
 
@@ -94,12 +94,8 @@ export default function App() {
 
               {/* juegos */}
             <Route path="/juegos" element={<InicioJuegos />} />
-            <Route path="/juegos/docente" element={
-              <RutaProtegidaConRol rol="docente">
-                <DocentePanel />
-              </RutaProtegidaConRol>
-            } />
-            <Route path="/juegos/sala/:id" element={<LobbyEstudiante />} />
+            <Route path="/juegos/docente" element={<DocentePanel />} />
+            
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -3,7 +3,7 @@ import { db } from '../../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { PlusCircle, Trash2, CheckSquare } from 'lucide-react';
 
-export default function CrearJuego() {
+export default function CrearJuego({ usuario }) {
   const [nombreJuego, setNombreJuego] = useState('');
   const [preguntas, setPreguntas] = useState([
     { pregunta: '', opciones: ['', '', '', ''], respuestaCorrecta: 0 }
@@ -43,6 +43,10 @@ export default function CrearJuego() {
   };
   
   const guardarJuego = async () => {
+    if (!usuario) {
+      alert("Error de autenticación. No se puede guardar el juego.");
+      return;
+    }
     if (!nombreJuego.trim()) {
       alert("Por favor, dale un nombre al juego.");
       return;
@@ -57,7 +61,7 @@ export default function CrearJuego() {
         nombre: nombreJuego,
         preguntas: preguntas,
         creadoEn: serverTimestamp(),
-        docenteId: "id_del_docente_autenticado" // TODO: Reemplazar con ID real
+        docenteId: usuario.uid
       });
       alert("¡Juego guardado con éxito!");
       resetForm();
