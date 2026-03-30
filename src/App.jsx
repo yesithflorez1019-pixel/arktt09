@@ -95,7 +95,7 @@ export default function App() {
               {/* juegos */}
             <Route path="/juegos" element={<InicioJuegos />} />
             <Route path="/juegos/docente" element={<DocentePanel />} />
-            
+            <Route path="/juegos/sala/:id" element={<LobbyEstudiante />} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

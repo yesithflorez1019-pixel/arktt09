@@ -5,20 +5,6 @@ import { doc, onSnapshot, updateDoc, arrayRemove, arrayUnion } from 'firebase/fi
 import { Users, Loader2, Gamepad2, CheckCircle2, XCircle, Trophy } from 'lucide-react';
 import usePageTitle from '../../components/usePageTitle';
 
-// DICCIONARIO DE PREGUNTAS (Base de datos de mentiras para probar)
-const PREGUNTAS = {
-  "Matemáticas": [
-    { pregunta: "¿Cuánto es 5 + 3?", opciones: ["6", "7", "8", "9"], correcta: "8" },
-    { pregunta: "Si tienes 10 manzanas y te comes 4, ¿cuántas te quedan?", opciones: ["4", "5", "6", "7"], correcta: "6" },
-    { pregunta: "¿Qué número sigue? 2, 4, 6, 8...", opciones: ["9", "10", "11", "12"], correcta: "10" }
-  ],
-  "Inglés": [
-    { pregunta: "¿Cómo se dice 'Rojo' en inglés?", opciones: ["Blue", "Red", "Yellow", "Green"], correcta: "Red" },
-    { pregunta: "What animal is a 'Dog'?", opciones: ["Gato", "Pájaro", "Perro", "Pez"], correcta: "Perro" },
-    { pregunta: "Completa: 'Good ________ (Buenos días)'", opciones: ["Night", "Morning", "Afternoon", "Bye"], correcta: "Morning" }
-  ]
-};
-
 export default function LobbyEstudiante() {
   usePageTitle('Jugando | Liceo Formador');
   const { id } = useParams();
@@ -28,7 +14,6 @@ export default function LobbyEstudiante() {
 
   const [sala, setSala] = useState(null);
   
-  // ESTADOS DEL JUEGO
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [puntaje, setPuntaje] = useState(0);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
@@ -52,11 +37,13 @@ export default function LobbyEstudiante() {
     return () => unsubscribe();
   }, [id, navigate]);
 
-  // FUNCIÓN PARA RESPONDER
   const responder = async (opcionElegida) => {
-    if (respuestaSeleccionada) return; // Ya respondió, no puede presionar otra vez
+    if (respuestaSeleccionada) return; 
     
-    const cuestionario = PREGUNTAS[sala.materia] || PREGUNTAS["Matemáticas"];
+    // AQUÍ ESTÁ LA MAGIA: Leemos las preguntas directo de la base de datos de la sala
+    const cuestionario = sala.preguntas || [];
+    if(cuestionario.length === 0) return;
+
     const preguntaVerdadera = cuestionario[preguntaActual];
     
     setRespuestaSeleccionada(opcionElegida);
@@ -64,16 +51,14 @@ export default function LobbyEstudiante() {
     let nuevosPuntos = puntaje;
     if (opcionElegida === preguntaVerdadera.correcta) {
       setEsCorrecta(true);
-      nuevosPuntos += 100; // ¡Suma 100 puntos!
+      nuevosPuntos += 100; 
       setPuntaje(nuevosPuntos);
     } else {
       setEsCorrecta(false);
     }
 
-    // Actualizar Firebase para que la profe vea los puntos en vivo
     try {
       const docRef = doc(db, "partidas_juegos", id);
-      // Borramos su puntaje viejo y metemos el nuevo (Es un truco rápido con Firebase Arrays)
       await updateDoc(docRef, {
         jugadores: arrayRemove({ nombre: nombreJugador, puntaje: puntaje })
       });
@@ -82,7 +67,6 @@ export default function LobbyEstudiante() {
       });
     } catch(e) { console.log(e); }
 
-    // Pasar a la siguiente pregunta después de 2 segundos
     setTimeout(() => {
       setRespuestaSeleccionada(null);
       setEsCorrecta(null);
@@ -97,29 +81,44 @@ export default function LobbyEstudiante() {
 
   if (!sala) return <div className="min-h-screen bg-celeste-50 flex items-center justify-center"><Loader2 size={48} className="animate-spin text-celeste-500" /></div>;
 
-  // --- 1. SALA DE ESPERA ---
   if (sala.estado === 'esperando') {
     return (
       <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-6 text-white text-center">
-        {/* ... (Todo lo que tenías antes en esperando, déjalo igual, o usa este resumido) */}
         <div className="w-full max-w-2xl bg-slate-800 p-10 md:p-16 rounded-[3rem] shadow-2xl border border-slate-700 animate-fade-in-up">
            <Loader2 size={48} className="text-celeste-400 animate-spin mx-auto mb-6" />
            <h1 className="text-4xl md:text-5xl font-black mb-4">¡Preparado, <span className="text-celeste-400">{nombreJugador}</span>!</h1>
-           <p className="text-xl text-slate-400">Mira a la profe. El juego empezará pronto.</p>
+           <p className="text-xl text-slate-400 mb-10">Mira a la profe. El juego empezará pronto.</p>
+           
+           <div className="bg-slate-900 rounded-3xl p-6 border border-slate-700">
+              <h3 className="font-bold text-slate-300 mb-4 flex items-center justify-center gap-2">
+                 <Users className="text-celeste-400"/> Exploradores Conectados ({sala.jugadores?.length || 0})
+              </h3>
+              <div className="flex flex-wrap justify-center gap-3">
+                 {sala.jugadores?.map((jugador, index) => (
+                    <span key={index} className={`px-4 py-2 rounded-full text-sm font-bold ${jugador.nombre === nombreJugador ? 'bg-celeste-500 text-white' : 'bg-slate-700 text-slate-300'}`}>
+                       {jugador.nombre} {jugador.nombre === nombreJugador && "(Tú)"}
+                    </span>
+                 ))}
+              </div>
+           </div>
         </div>
       </div>
     );
   }
 
-  // --- 2. JUGANDO ---
   if (sala.estado === 'jugando' && !juegoTerminado) {
-    const cuestionario = PREGUNTAS[sala.materia] || PREGUNTAS["Matemáticas"];
+    const cuestionario = sala.preguntas || [];
+    
+    // Si la sala por algún error no tiene preguntas, mostramos un error elegante
+    if(cuestionario.length === 0) {
+       return <div className="min-h-screen bg-red-500 flex items-center justify-center text-white text-2xl font-bold">La profe no agregó preguntas a este juego.</div>
+    }
+
     const preguntaObj = cuestionario[preguntaActual];
 
     return (
        <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 animate-fade-in">
            
-           {/* Barra superior de info */}
            <div className="w-full max-w-4xl flex justify-between items-center mb-8 bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
                <span className="font-bold text-slate-500 uppercase tracking-wider text-sm">Pregunta {preguntaActual + 1} de {cuestionario.length}</span>
                <div className="flex items-center gap-2 bg-yellow-100 text-yellow-600 px-4 py-2 rounded-xl font-black text-lg">
@@ -127,20 +126,20 @@ export default function LobbyEstudiante() {
                </div>
            </div>
 
-           {/* Tarjeta de Pregunta */}
            <div className="w-full max-w-4xl bg-white rounded-[3rem] shadow-xl border border-slate-100 p-10 text-center mb-8 relative overflow-hidden">
                <h2 className="text-3xl md:text-4xl font-black text-slate-800 leading-tight">
                  {preguntaObj.pregunta}
                </h2>
            </div>
 
-           {/* Botones de Opciones */}
            <div className="w-full max-w-4xl grid md:grid-cols-2 gap-4">
               {preguntaObj.opciones.map((opcion, index) => {
+                 // Si la opción está vacía, no la renderizamos
+                 if(!opcion.trim()) return null; 
+
                  let bgColor = "bg-white hover:bg-celeste-50 hover:border-celeste-300 border-slate-200";
                  let textColor = "text-slate-700";
                  
-                 // Colores para cuando el niño responde
                  if (respuestaSeleccionada) {
                     if (opcion === preguntaObj.correcta) {
                        bgColor = "bg-green-500 border-green-600";
@@ -166,7 +165,6 @@ export default function LobbyEstudiante() {
               })}
            </div>
 
-           {/* Feedback (Bien o Mal) */}
            {respuestaSeleccionada && (
               <div className={`mt-8 px-8 py-4 rounded-full font-black text-2xl animate-bounce flex items-center gap-3 text-white shadow-lg ${esCorrecta ? 'bg-green-500' : 'bg-red-500'}`}>
                  {esCorrecta ? <><CheckCircle2 size={32}/> ¡CORRECTO!</> : <><XCircle size={32}/> ¡CASI!</>}
@@ -176,7 +174,6 @@ export default function LobbyEstudiante() {
     );
   }
 
-  // --- 3. JUEGO TERMINADO ---
   if (juegoTerminado) {
      return (
         <div className="min-h-screen bg-celeste-600 flex flex-col items-center justify-center p-6 text-white text-center animate-fade-in-up">

@@ -156,12 +156,12 @@ export default function Inicio() {
       {/* ACCESOS RÁPIDOS */}
       <section className="py-16 bg-slate-50 relative -mt-10 md:-mt-20 z-20">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {accesosRapidos.map((item, index) => (
               <div 
                 key={index}
                 onClick={item.accion}
-                className="group relative h-64 rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="w-full sm:w-[45%] md:w-[30%] lg:w-[18%] max-w-[350px] flex-grow group relative h-64 rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="absolute inset-0">
                   <img src={item.imagen} alt={item.titulo} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />

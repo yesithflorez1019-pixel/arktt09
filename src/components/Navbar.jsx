@@ -113,9 +113,10 @@ export default function Navbar() {
             href="https://e.plataformaintegra.net/liceoexploradores/"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-celeste-400 hover:bg-celeste-500 text-white font-bold py-2.5 px-6 rounded-full shadow-suave hover:shadow-fuerte transition-all transform hover:-translate-y-0.5"
+            className="block transition-transform transform hover:scale-105"
+            title="Ir a Plataforma Integra"
           >
-            Plataforma
+            <img src="/fotos-inicio/logo-integra.png" alt="Plataforma Integra" className="h-10 object-contain" />
           </a>
         </div>
 
@@ -175,14 +176,14 @@ export default function Navbar() {
             Contacto
           </button>
 
-          <div className="mt-4 pt-4 border-t border-gray-100">
+          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center">
              <a
               href="https://e.plataformaintegra.net/liceoexploradores/"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center bg-celeste-400 hover:bg-celeste-500 text-white p-3 rounded-lg font-bold shadow-md"
+              className="block transition-transform transform hover:scale-105"
             >
-              Ir a Plataforma
+              <img src="/fotos-inicio/logo-integra.png" alt="Plataforma Integra" className="h-12 object-contain" />
             </a>
           </div>
 
