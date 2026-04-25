@@ -9,7 +9,7 @@ export default function MisJuegos() {
   usePageTitle('Mis Juegos | Liceo Formador');
   
   const [juegos, setJuegos] = useState([]);
-  const docenteId = "id_del_docente_autenticado"; // TODO: Reemplazar con ID real
+  const docenteId = "id_del_docente_autenticado"; /* TODO: Reemplazar con ID real */
 
   useEffect(() => {
     const q = query(collection(db, "juegos"), where("docenteId", "==", docenteId));
@@ -40,7 +40,6 @@ export default function MisJuegos() {
     <div className="container mx-auto max-w-7xl px-6 mt-10">
       <div className="grid lg:grid-cols-12 gap-8">
         
-        {/* COLUMNA IZQ: Lista de Juegos Creados */}
         <div className="lg:col-span-4">
           <div className="bg-white rounded-[2rem] p-8 shadow-lg border border-slate-100 sticky top-24">
             <h3 className="font-bold text-xl text-slate-800 mb-6 flex items-center gap-2">
@@ -71,7 +70,6 @@ export default function MisJuegos() {
           </div>
         </div>
 
-        {/* COLUMNA DER: Formulario para Crear/Editar Juego */}
         <div className="lg:col-span-8">
           <CrearJuego />
         </div>

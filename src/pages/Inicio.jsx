@@ -295,19 +295,23 @@ export default function Inicio() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {noticiasDestacadas.map((item) => (
-               <div key={item.id} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 h-full">
-                 <div className="h-56 relative overflow-hidden shrink-0">
-                   <img src={item.imagen} alt={item.titulo} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
-                   <div className="absolute top-4 left-4 bg-celeste-600 text-white text-xs font-bold px-3 py-1 rounded-md shadow-lg">
+               <div 
+                 key={item.id} 
+                 onClick={() => navigate(`/noticias/${item.id}`)}
+                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden border border-slate-100 h-full cursor-pointer group"
+               >
+                 <div className="h-56 relative overflow-hidden shrink-0 bg-slate-100 flex items-center justify-center">
+                   <img src={item.imagen} alt={item.titulo} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
+                   <div className="absolute top-4 left-4 bg-celeste-600 text-white text-xs font-bold px-3 py-1 rounded-md shadow-lg z-10">
                      {item.fecha}
                    </div>
                  </div>
                  <div className="p-8 flex flex-col grow">
-                   <h3 className="font-bold text-xl text-slate-800 mb-3 leading-tight hover:text-celeste-600 transition-colors">{item.titulo}</h3>
+                   <h3 className="font-bold text-xl text-slate-800 mb-3 leading-tight group-hover:text-celeste-600 transition-colors">{item.titulo}</h3>
                    <p className="text-slate-500 text-sm mb-6 line-clamp-3 grow">{item.resumen}</p>
-                   <button onClick={() => navigate('/noticias/' + item.id)} className="text-celeste-600 font-bold text-sm uppercase tracking-wider hover:underline self-start">
+                   <span className="text-celeste-600 font-bold text-sm uppercase tracking-wider group-hover:underline self-start">
                      Leer Nota Completa
-                   </button>
+                   </span>
                  </div>
                </div>
             ))}
@@ -316,6 +320,38 @@ export default function Inicio() {
           <button onClick={() => navigate('/noticias')} className="md:hidden mt-8 w-full py-4 bg-white text-celeste-700 font-bold rounded-xl shadow-sm">
             Ver todas las noticias
           </button>
+        </div>
+      </section>
+
+      {/* FEED DE INSTAGRAM (WIDGET EXTERNO) */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 text-center">
+          <div className="mb-10">
+            <div className="inline-flex items-center justify-center p-4 bg-pink-50 text-pink-600 rounded-full mb-4">
+              <Instagram size={32} />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-4">Síguenos en Instagram</h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">
+              Descubre el día a día de nuestros exploradores y únete a nuestra comunidad virtual.
+            </p>
+          </div>
+
+          {/* 
+            Aquí es donde se inserta el código del Widget.
+            Normalmente plataformas como Elfsight, SnapWidget o Curator.io te dan un <div> o un <iframe>
+            como el siguiente:
+          */}
+          <div className="max-w-5xl mx-auto bg-slate-50 rounded-3xl border border-slate-100 p-4 min-h-[400px] flex items-center justify-center relative overflow-hidden shadow-inner">
+            {/* EJEMPLO DE CONTENEDOR (REEMPLAZAR POR EL REAL DEL CLIENTE) */}
+            <p className="text-slate-400 font-bold italic absolute z-0">Cargando feed de Instagram...</p>
+            
+            {/* Ejemplo Elfsight: <div className="elfsight-app-xxxx-xxxx-xxxx-xxxx"></div> */}
+            {/* Ejemplo SnapWidget: <iframe src="https://snapwidget.com/embed/ejemplo" className="w-full h-full border-0 relative z-10" allowtransparency="true" frameBorder="0" scrolling="no"></iframe> */}
+          </div>
+          
+          <a href="https://www.instagram.com/liceoformadordexploradores?igsh=bGRwdnlsd2k2cjhl" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold px-8 py-3 rounded-full mt-8 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+            Ver nuestro perfil <ArrowRight size={18} />
+          </a>
         </div>
       </section>
 

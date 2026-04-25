@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Lock, Unlock, ArrowRight, Loader2 } from 'lucide-react';
-import { auth } from '../../firebase'; // Importamos tu Firebase
+import { auth } from '../../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginDocente() {
@@ -14,10 +14,8 @@ export default function LoginDocente() {
     setCargando(true);
     setError('');
     try {
-      // Inicia sesión real en Firebase
       await signInWithEmailAndPassword(auth, email, password);
-      // OJO: No usamos navigate() aquí. Al iniciar sesión, el DocentePanel
-      // se dará cuenta solito y cambiará la pantalla. ¡Magia de React!
+      /* Nota: Al iniciar sesión el DocentePanel detecta el cambio automáticamente */
     } catch {
       setError('Correo o contraseña incorrectos. Intenta de nuevo.');
       setCargando(false);

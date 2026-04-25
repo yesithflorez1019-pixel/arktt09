@@ -13,7 +13,6 @@ export default function Admisiones() {
     <div className="animate-fade-in py-12 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6 max-w-6xl">
         
-        {/* Header Breadcrumb */}
         <div className="mb-8">
             <button onClick={() => navigate('/')} className="text-sm text-slate-500 hover:text-celeste-600 font-bold flex items-center gap-2 transition-colors">
                 <ArrowLeft size={16} /> Volver al Inicio
@@ -30,9 +29,7 @@ export default function Admisiones() {
 
         <div className="grid lg:grid-cols-2 gap-10">
           
-          {/* Columna Izquierda: Requisitos */}
           <div className="space-y-8">
-             {/* Tarjeta Requisitos */}
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-2 h-full bg-celeste-500"></div>
               <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
@@ -58,7 +55,6 @@ export default function Admisiones() {
               </ul>
             </div>
 
-            {/* Tarjeta Aviso */}
             <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 flex gap-4">
                 <Info className="text-orange-500 shrink-0" />
                 <div>
@@ -70,7 +66,6 @@ export default function Admisiones() {
             </div>
           </div>
 
-          {/* Columna Derecha: Pasos */}
           <div className="space-y-6">
               <h3 className="text-xl font-bold text-slate-800 mb-4">Ruta de Ingreso</h3>
               

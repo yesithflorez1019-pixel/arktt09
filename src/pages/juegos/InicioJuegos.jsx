@@ -4,7 +4,6 @@ import { Seccion, TituloSeccion } from '../../components/UI';
 import usePageTitle from '../../components/usePageTitle';
 import { Sparkles, Gamepad2 } from 'lucide-react';
 
-// FIREBASE (Nuevos imports)
 import { db } from '../../firebase';
 import { collection, query, where, getDocs, updateDoc, doc, arrayUnion } from 'firebase/firestore';
 
@@ -23,7 +22,6 @@ export default function InicioJuegos() {
     setCargando(true);
 
     try {
-      // 1. Buscar la sala con ese PIN en Firebase
       const q = query(collection(db, "partidas_juegos"), where("pin", "==", pinSala));
       const querySnapshot = await getDocs(q);
 
@@ -32,24 +30,18 @@ export default function InicioJuegos() {
         setCargando(false);
         return;
       }
-
-      // 2. Extraer los datos de la sala
       const salaDoc = querySnapshot.docs[0];
       const salaData = salaDoc.data();
 
-      // 3. Validar si ya empezó
       if (salaData.estado !== 'esperando') {
         alert("¡Ups! Esta partida ya comenzó o ya terminó.");
         setCargando(false);
         return;
       }
 
-      // 4. Agregar al alumno a la lista de jugadores de esa sala
       await updateDoc(doc(db, "partidas_juegos", salaDoc.id), {
         jugadores: arrayUnion({ nombre: nombreAlumno, puntaje: 0 })
       });
-
-      // 5. ¡Enviarlo a la sala de espera! Le pasamos el nombre por la ruta
       navigate(`/juegos/sala/${salaDoc.id}`, { state: { nombreJugador: nombreAlumno } });
 
     } catch (error) {
@@ -84,7 +76,6 @@ export default function InicioJuegos() {
               <div className="absolute -inset-2 bg-celeste-300 rounded-[3rem] rotate-2 group-hover:rotate-0 transition-transform duration-500 opacity-50 z-[-1]"></div>
               
               <form onSubmit={empezarAventura} className="space-y-6">
-                  {/* CAMPO: NOMBRE */}
                   <div>
                     <label className="text-sm font-bold text-celeste-800 uppercase block mb-2 text-left ml-2">Tu Nombre:</label>
                     <input 
@@ -98,13 +89,12 @@ export default function InicioJuegos() {
                     />
                   </div>
 
-                  {/* CAMPO: PIN */}
                   <div>
                     <label className="text-sm font-bold text-celeste-800 uppercase block mb-2 text-left ml-2">PIN de la Sala:</label>
                     <input 
                       type="text" 
-                      value={pinSala} 
-                      onChange={e => setPinSala(e.target.value.replace(/\D/g, ''))} // Solo deja escribir números
+                      value={pinSala}
+                      onChange={e => setPinSala(e.target.value.replace(/\D/g, ''))} 
                       className="w-full text-center p-4 rounded-2xl border-2 border-celeste-200 focus:outline-none focus:ring-4 focus:ring-celeste-300 text-3xl tracking-[0.5em] font-black text-slate-800 shadow-sm"
                       placeholder="12345"
                       maxLength={5}

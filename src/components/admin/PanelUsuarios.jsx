@@ -9,7 +9,6 @@ export default function PanelUsuarios() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Generamos el email automáticamente a partir del nombre de usuario
   const generatedEmail = username ? `${username.trim().toLowerCase()}@liceo.edu.co` : '';
 
   const handleSubmit = async (e) => {
@@ -32,8 +31,7 @@ export default function PanelUsuarios() {
 
     console.log("Intentando crear usuario con:", userData);
     
-    // --- AQUÍ CONECTAREMOS CON LA CLOUD FUNCTION ---
-    // Por ahora, simularemos una carga y mostraremos un mensaje.
+    /* Conexión a Cloud Function para la gestión de usuarios (pendiente) */
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     setError("Funcionalidad no conectada. Revisa la consola para ver los datos que se enviarían.");
@@ -102,7 +100,6 @@ export default function PanelUsuarios() {
         </button>
       </form>
 
-      {/* Aquí podría ir una lista de usuarios existentes en el futuro */}
     </div>
   );
 }

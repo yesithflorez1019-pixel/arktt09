@@ -5,7 +5,7 @@ import Mantenimiento from '../../components/Mantenimiento';
 import { Music, Shield, Flag } from 'lucide-react';
 
 export default function Simbolos() {
-  const EN_MANTENIMIENTO = false;
+  const EN_MANTENIMIENTO = true;
   
   usePageMeta("Símbolos Institucionales", "Descubre los símbolos que representan nuestra identidad y valores en el Liceo Formador de Exploradores.");
   

@@ -3,8 +3,7 @@ import { auth } from '../firebase'; // Importamos la conexión
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
-// 🚨 AQUÍ VAN LOS CORREOS QUE SÍ PUEDEN VER EL PANEL DE NOTICIAS
-// (Asegúrate de poner el tuyo real aquí)
+
 const CORREOS_ADMIN = [
   "yesith@liceoformador.edu.co",
   "directora@liceoexploradores.edu.co"

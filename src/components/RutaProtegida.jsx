@@ -3,8 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { auth } from '../firebase'; 
 import { onAuthStateChanged } from 'firebase/auth';
 
-// 🚨 AQUÍ VAN LOS CORREOS QUE SÍ PUEDEN ENTRAR AL PANEL DE NOTICIAS
-// Escribe el tuyo real aquí. Todos los demás serán bloqueados.
+/* Configuración de seguridad: Correos autorizados para el acceso administrativo */
 const CORREOS_ADMIN = [
   "yesith@liceoformador.edu.co",
   "directora@liceoexploradores.edu.co" 
@@ -32,18 +31,14 @@ export default function RutaProtegida({ children }) {
     );
   }
 
-  // REGLA 1: Si no hay nadie logueado, lo mandamos al login
   if (!usuario) {
     return <Navigate to="/login" replace />;
   }
 
-  // REGLA 2: Si está logueado, pero su correo NO es de los jefes, lo rebotamos.
   if (!CORREOS_ADMIN.includes(usuario.email)) {
-    // Como probablemente es un docente curioso, lo mandamos de vuelta a sus juegos
     alert("🛑 Acceso Denegado: Esta área es solo para la Administración del colegio.");
     return <Navigate to="/" replace />;
   }
 
-  // REGLA 3: Si pasó la prueba VIP, le mostramos el panel de Admin
   return children;
 }

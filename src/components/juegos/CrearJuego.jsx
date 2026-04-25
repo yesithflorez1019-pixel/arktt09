@@ -1,153 +1,194 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { PlusCircle, Trash2, CheckSquare } from 'lucide-react';
+import { collection, addDoc, serverTimestamp, doc, updateDoc } from 'firebase/firestore';
+import { BookPlus, Save, Trash2, Image as ImageIcon, Link, Type } from 'lucide-react';
 
-export default function CrearJuego({ usuario }) {
+export default function CrearJuego({ usuario, juegoAEditar, onGuardado }) {
   const [nombreJuego, setNombreJuego] = useState('');
-  const [preguntas, setPreguntas] = useState([
-    { pregunta: '', opciones: ['', '', '', ''], respuestaCorrecta: 0 }
-  ]);
+  const [actividades, setActividades] = useState([]);
 
-  const resetForm = () => {
-    setNombreJuego('');
-    setPreguntas([{ pregunta: '', opciones: ['', '', '', ''], respuestaCorrecta: 0 }]);
-  }
+  /* Carga los datos al recibir un juego existente */
+  useEffect(() => {
+    if (juegoAEditar) {
+      setNombreJuego(juegoAEditar.nombre || '');
+      setActividades(juegoAEditar.actividades || juegoAEditar.preguntas || []);
+    } else {
+      setNombreJuego('');
+      setActividades([]);
+    }
+  }, [juegoAEditar]);
 
-  const agregarPregunta = () => {
-    setPreguntas([...preguntas, { pregunta: '', opciones: ['', '', '', ''], respuestaCorrecta: 0 }]);
+  const agregarActividad = (tipo) => {
+    const nuevaActividad = {
+      id: Date.now().toString(),
+      tipo: tipo, 
+      instruccion: '',
+      datos: tipo === 'opcion_multiple' 
+        ? { opciones: ['', '', '', ''], correcta: 0 } 
+        : tipo === 'unir' 
+        ? { parejas: [{ izq: '', der: '' }] }
+        : tipo === 'arrastrar'
+        ? { imagenFondo: '', zonas: [] }
+        : { palabras: [] } 
+    };
+    setActividades([...actividades, nuevaActividad]);
   };
 
-  const eliminarPregunta = (index) => {
-    const nuevasPreguntas = [...preguntas];
-    nuevasPreguntas.splice(index, 1);
-    setPreguntas(nuevasPreguntas);
+  const eliminarActividad = (index) => {
+    const nuevas = [...actividades];
+    nuevas.splice(index, 1);
+    setActividades(nuevas);
   };
 
-  const handlePreguntaChange = (index, value) => {
-    const nuevasPreguntas = [...preguntas];
-    nuevasPreguntas[index].pregunta = value;
-    setPreguntas(nuevasPreguntas);
-  };
-
-  const handleOpcionChange = (preguntaIndex, opcionIndex, value) => {
-    const nuevasPreguntas = [...preguntas];
-    nuevasPreguntas[preguntaIndex].opciones[opcionIndex] = value;
-    setPreguntas(nuevasPreguntas);
-  };
-
-  const handleRespuestaCorrectaChange = (preguntaIndex, opcionIndex) => {
-    const nuevasPreguntas = [...preguntas];
-    nuevasPreguntas[preguntaIndex].respuestaCorrecta = opcionIndex;
-    setPreguntas(nuevasPreguntas);
-  };
-  
   const guardarJuego = async () => {
-    if (!usuario) {
-      alert("Error de autenticación. No se puede guardar el juego.");
-      return;
-    }
-    if (!nombreJuego.trim()) {
-      alert("Por favor, dale un nombre al juego.");
-      return;
-    }
-    if (preguntas.some(p => !p.pregunta.trim() || p.opciones.some(o => !o.trim()))) {
-      alert("Asegúrate de que todas las preguntas y opciones estén completas.");
-      return;
-    }
+    if (!usuario) return alert("Debes iniciar sesión para guardar.");
+    if (!nombreJuego.trim()) return alert("Por favor, dale un nombre a tu juego.");
+    if (actividades.length === 0) return alert("Agrega al menos una actividad.");
 
     try {
-      await addDoc(collection(db, "juegos"), {
-        nombre: nombreJuego,
-        preguntas: preguntas,
-        creadoEn: serverTimestamp(),
-        docenteId: usuario.uid
-      });
-      alert("¡Juego guardado con éxito!");
-      resetForm();
+      if (juegoAEditar) {
+        await updateDoc(doc(db, "juegos", juegoAEditar.id), {
+          nombre: nombreJuego,
+          actividades: actividades,
+          editadoEn: serverTimestamp()
+        });
+        alert("¡Juego actualizado exitosamente!");
+      } else {
+        await addDoc(collection(db, "juegos"), {
+          nombre: nombreJuego,
+          actividades: actividades, 
+          docenteId: usuario.uid,
+          creadorNombre: usuario.displayName || usuario.email || "Docente",
+          creadoEn: serverTimestamp()
+        });
+        alert("¡Juego guardado exitosamente!");
+      }
+      setNombreJuego('');
+      setActividades([]);
+      if (onGuardado) onGuardado(); 
     } catch (error) {
-      console.error("Error al guardar el juego: ", error);
-      alert("Hubo un error al guardar el juego. Inténtalo de nuevo.");
+      console.error(error);
+      alert("Hubo un error al guardar el juego.");
     }
   };
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+    <div className="bg-white rounded-[2rem] p-8 shadow-lg border border-slate-100 min-h-[400px]">
       <h3 className="font-bold text-2xl text-slate-800 mb-6 flex items-center gap-2">
-        <PlusCircle className="text-purple-500" /> Crear Nuevo Juego
+        <BookPlus className="text-purple-500" /> {juegoAEditar ? "Editar Juego" : "Creador Avanzado de Juegos"}
       </h3>
+
       <div className="space-y-6">
         <div>
-          <label className="text-sm font-bold text-slate-500 uppercase block mb-2">Nombre del Juego</label>
-          <input
-            type="text"
-            value={nombreJuego}
+          <label className="text-xs font-bold text-slate-400 uppercase block mb-2">Nombre del Juego</label>
+          <input 
+            type="text" 
+            value={nombreJuego} 
             onChange={(e) => setNombreJuego(e.target.value)}
-            placeholder="Ej: Trivia de Multiplicaciones"
-            className="w-full p-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-purple-300"
+            placeholder="Ej: Aventura Espacial - Matemáticas"
+            className="w-full p-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 font-bold focus:ring-2 focus:ring-purple-300 outline-none"
           />
         </div>
 
-        <hr className="border-slate-200 my-8"/>
+        <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+          <h4 className="font-bold text-slate-700 mb-4">Agregar Actividad al Juego</h4>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button onClick={() => agregarActividad('opcion_multiple')} className="p-3 bg-white border border-slate-200 rounded-xl hover:border-purple-300 hover:shadow-md transition-all flex flex-col items-center gap-2 text-sm font-bold text-slate-600">
+              <Type className="text-blue-500"/> Quiz (Opciones)
+            </button>
+            <button onClick={() => agregarActividad('arrastrar')} className="p-3 bg-white border border-slate-200 rounded-xl hover:border-purple-300 hover:shadow-md transition-all flex flex-col items-center gap-2 text-sm font-bold text-slate-600">
+              <ImageIcon className="text-pink-500"/> Arrastrar
+            </button>
+            <button onClick={() => agregarActividad('unir')} className="p-3 bg-white border border-slate-200 rounded-xl hover:border-purple-300 hover:shadow-md transition-all flex flex-col items-center gap-2 text-sm font-bold text-slate-600">
+              <Link className="text-green-500"/> Unir Líneas
+            </button>
+            <button onClick={() => agregarActividad('sopa_letras')} className="p-3 bg-white border border-slate-200 rounded-xl hover:border-purple-300 hover:shadow-md transition-all flex flex-col items-center gap-2 text-sm font-bold text-slate-600">
+              <BookPlus className="text-orange-500"/> Sopa Letras
+            </button>
+          </div>
+        </div>
 
-        <h4 className="font-bold text-xl text-slate-700 mb-4">Preguntas</h4>
-        
-        {preguntas.map((item, index) => (
-          <div key={index} className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 relative">
-            <h5 className="font-bold text-slate-600 mb-4">Pregunta {index + 1}</h5>
-            <input
-              type="text"
-              value={item.pregunta}
-              onChange={(e) => handlePreguntaChange(index, e.target.value)}
-              placeholder="Escribe la pregunta"
-              className="w-full p-3 rounded-lg border border-slate-300 mb-4"
+        {actividades.map((act, index) => (
+          <div key={act.id} className="relative bg-white border-2 border-slate-100 rounded-2xl p-6 shadow-sm">
+            <button onClick={() => eliminarActividad(index)} className="absolute top-4 right-4 text-slate-400 hover:text-red-500 transition-colors">
+              <Trash2 size={20} />
+            </button>
+            <h5 className="font-black text-purple-600 mb-4 uppercase tracking-wider text-sm">
+              Nivel {index + 1}: {act.tipo.replace('_', ' ')}
+            </h5>
+            
+            <input 
+              type="text" 
+              placeholder="Instrucción (Ej: Arrastra la imagen al lugar correcto)"
+              className="w-full p-3 rounded-lg border border-slate-200 mb-4 bg-slate-50"
+              value={act.instruccion}
+              onChange={(e) => {
+                const nuevas = [...actividades];
+                nuevas[index].instruccion = e.target.value;
+                setActividades(nuevas);
+              }}
             />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {item.opciones.map((opcion, i) => (
-                <div key={i} className="flex items-center gap-2">
-                   <input
-                    type="text"
-                    value={opcion}
-                    onChange={(e) => handleOpcionChange(index, i, e.target.value)}
-                    placeholder={`Opción ${i + 1}`}
-                    className="w-full p-3 rounded-lg border border-slate-300"
-                  />
-                  <button 
-                    onClick={() => handleRespuestaCorrectaChange(index, i)}
-                    className={`p-2 rounded-lg transition-colors ${item.respuestaCorrecta === i ? 'bg-green-500 text-white' : 'bg-slate-200 hover:bg-green-200'}`}
-                    title="Marcar como correcta"
-                  >
-                    <CheckSquare size={20}/>
-                  </button>
+            {act.tipo === 'unir' ? (
+              <div className="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                <label className="text-xs font-bold text-slate-500 uppercase mb-4 block">Parejas a Conectar</label>
+                <div className="space-y-3">
+                  {act.datos.parejas.map((pareja, pIndex) => (
+                    <div key={pIndex} className="flex items-center gap-3">
+                      <input 
+                        type="text" 
+                        value={pareja.izq}
+                        onChange={(e) => {
+                          const nuevas = [...actividades];
+                          nuevas[index].datos.parejas[pIndex].izq = e.target.value;
+                          setActividades(nuevas);
+                        }}
+                        placeholder="Lado Izq (Ej: Dog o URL Imagen)"
+                        className="w-1/2 p-3 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-green-300"
+                      />
+                      <span className="text-slate-400 font-bold flex-shrink-0">🔗</span>
+                      <input 
+                        type="text" 
+                        value={pareja.der}
+                        onChange={(e) => {
+                          const nuevas = [...actividades];
+                          nuevas[index].datos.parejas[pIndex].der = e.target.value;
+                          setActividades(nuevas);
+                        }}
+                        placeholder="Lado Der (Ej: Perro o URL Imagen)"
+                        className="w-1/2 p-3 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-green-300"
+                      />
+                      <button onClick={() => {
+                        const nuevas = [...actividades];
+                        nuevas[index].datos.parejas.splice(pIndex, 1);
+                        setActividades(nuevas);
+                      }} className="p-3 bg-red-50 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors flex-shrink-0">
+                        <Trash2 size={18}/>
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-
-            <button
-              onClick={() => eliminarPregunta(index)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-red-500"
-            >
-              <Trash2 size={18} />
-            </button>
+                <button onClick={() => {
+                  const nuevas = [...actividades];
+                  nuevas[index].datos.parejas.push({izq: '', der: ''});
+                  setActividades(nuevas);
+                }} className="mt-5 text-sm font-bold text-green-700 bg-green-100 px-4 py-2 rounded-lg hover:bg-green-200 transition-colors flex items-center gap-2">
+                  + Añadir nueva pareja
+                </button>
+              </div>
+            ) : (
+              <div className="p-4 bg-purple-50 text-purple-700 rounded-xl border border-purple-100 text-sm font-medium">
+                La interfaz de configuración para <b>{act.tipo.replace('_', ' ')}</b> se habilitará en la siguiente fase.
+              </div>
+            )}
           </div>
         ))}
 
-        <button
-          onClick={agregarPregunta}
-          className="w-full bg-slate-100 text-slate-600 font-bold py-3 rounded-lg hover:bg-slate-200 transition-all"
-        >
-          + Agregar Pregunta
-        </button>
-
-        <hr className="border-slate-200 my-8"/>
-
-        <button
-          onClick={guardarJuego}
-          className="w-full bg-purple-600 text-white font-bold py-4 rounded-xl shadow-md hover:bg-purple-700 transition-all"
-        >
-          Guardar Juego
-        </button>
+        {actividades.length > 0 && (
+          <button onClick={guardarJuego} className="w-full bg-purple-600 text-white font-black py-4 rounded-xl shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2">
+            <Save size={20} /> {juegoAEditar ? "Actualizar Juego" : "Guardar Juego Avanzado"}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ export default function Historia() {
   usePageTitle("Nuestra Historia y Filosofía | Liceo Formador");
   const navigate = useNavigate();
 
-  const EN_MANTENIMIENTO = false; 
+  const EN_MANTENIMIENTO = true; 
 
   if (EN_MANTENIMIENTO) {
     return <Mantenimiento pagina="nuestra Historia" />;
