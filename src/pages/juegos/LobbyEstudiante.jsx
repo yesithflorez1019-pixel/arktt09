@@ -180,7 +180,7 @@ const ActividadUnir = ({ actividad, alCompletar }) => {
                 style={{ touchAction: 'none' }}
                 className={`p-6 rounded-2xl border-4 text-xl font-bold transition-all transform shadow-sm flex items-center justify-center min-h-[100px] select-none ${conn ? (conn.correcta ? 'bg-green-100 border-green-500 text-green-700 opacity-60 cursor-default' : 'bg-red-100 border-red-500 text-red-700 opacity-60 cursor-default') : seleccionIzq?.id === item.id ? 'bg-celeste-100 border-celeste-500 scale-105 cursor-grabbing' : 'bg-white border-slate-200 hover:border-celeste-300 cursor-grab'}`}
               >
-                {item.texto.startsWith('http') ? <img src={item.texto} alt="img" className="max-h-24 mx-auto rounded object-contain" /> : item.texto}
+                {item.texto.startsWith('http') || item.texto.startsWith('data:image') ? <img src={item.texto} alt="img" className="max-h-24 mx-auto rounded object-contain" /> : item.texto}
               </button>
             );
           })}
@@ -193,7 +193,7 @@ const ActividadUnir = ({ actividad, alCompletar }) => {
                 key={item.id} id={item.id}
                 className={`btn-derecho p-6 rounded-2xl border-4 text-xl font-bold transition-all transform shadow-sm flex items-center justify-center min-h-[100px] select-none ${conn ? (conn.correcta ? 'bg-green-100 border-green-500 text-green-700 opacity-60 cursor-default' : 'bg-red-100 border-red-500 text-red-700 opacity-60 cursor-default') : 'bg-white border-slate-200 cursor-pointer'}`}
               >
-                {item.texto.startsWith('http') ? <img src={item.texto} alt="img" className="max-h-24 mx-auto rounded object-contain" /> : item.texto}
+                {item.texto.startsWith('http') || item.texto.startsWith('data:image') ? <img src={item.texto} alt="img" className="max-h-24 mx-auto rounded object-contain" /> : item.texto}
               </button>
             );
           })}

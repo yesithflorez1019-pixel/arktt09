@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../../firebase';
+import { db, storage } from '../../firebase';
 import { collection, addDoc, serverTimestamp, doc, updateDoc } from 'firebase/firestore';
-import { BookPlus, Save, Trash2, Image as ImageIcon, Link, Type } from 'lucide-react';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { BookPlus, Save, Trash2, Image as ImageIcon, Link, Type, ImagePlus, Loader2 } from 'lucide-react';
 
 export default function CrearJuego({ usuario, juegoAEditar, onGuardado }) {
   const [nombreJuego, setNombreJuego] = useState('');
   const [actividades, setActividades] = useState([]);
+  const [subiendoImagen, setSubiendoImagen] = useState(false);
 
   /* Carga los datos al recibir un juego existente */
   useEffect(() => {
@@ -38,6 +40,40 @@ export default function CrearJuego({ usuario, juegoAEditar, onGuardado }) {
     const nuevas = [...actividades];
     nuevas.splice(index, 1);
     setActividades(nuevas);
+  };
+
+  const handleTextChange = (e, index, pIndex, lado) => {
+    const val = e.target.value;
+    if (val.startsWith('data:image') || val.length > 500) {
+      alert("⚠️ Por favor, no pegues códigos largos de imágenes. Usa el botón de la cámara para subirla desde tu dispositivo.");
+      return;
+    }
+    const nuevas = [...actividades];
+    nuevas[index].datos.parejas[pIndex][lado] = val;
+    setActividades(nuevas);
+  };
+
+  const manejarSubidaImagen = async (e, index, pIndex, lado) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) return alert("La imagen es muy grande. Máximo 2MB.");
+
+    setSubiendoImagen(true);
+    try {
+      const imgRef = ref(storage, `juegos_assets/${Date.now()}_${file.name}`);
+      await uploadBytes(imgRef, file);
+      const url = await getDownloadURL(imgRef);
+      
+      const nuevas = [...actividades];
+      nuevas[index].datos.parejas[pIndex][lado] = url;
+      setActividades(nuevas);
+    } catch (error) {
+      console.error(error);
+      alert("Error al subir la imagen. Intenta de nuevo.");
+    } finally {
+      setSubiendoImagen(false);
+      e.target.value = '';
+    }
   };
 
   const guardarJuego = async () => {
@@ -135,29 +171,33 @@ export default function CrearJuego({ usuario, juegoAEditar, onGuardado }) {
                 <div className="space-y-3">
                   {act.datos.parejas.map((pareja, pIndex) => (
                     <div key={pIndex} className="flex items-center gap-3">
-                      <input 
-                        type="text" 
-                        value={pareja.izq}
-                        onChange={(e) => {
-                          const nuevas = [...actividades];
-                          nuevas[index].datos.parejas[pIndex].izq = e.target.value;
-                          setActividades(nuevas);
-                        }}
-                        placeholder="Lado Izq (Ej: Dog o URL Imagen)"
-                        className="w-1/2 p-3 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-green-300"
-                      />
+                      <div className="relative w-1/2">
+                        <input 
+                          type="text" 
+                          value={pareja.izq}
+                          onChange={(e) => handleTextChange(e, index, pIndex, 'izq')}
+                          placeholder="Lado Izq (Texto o URL)"
+                          className="w-full p-3 pr-10 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-green-300"
+                        />
+                        <label className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-slate-400 hover:text-celeste-500 transition-colors" title="Subir imagen">
+                          {subiendoImagen ? <Loader2 size={18} className="animate-spin"/> : <ImagePlus size={18}/>}
+                          <input type="file" accept="image/*" className="hidden" disabled={subiendoImagen} onChange={(e) => manejarSubidaImagen(e, index, pIndex, 'izq')} />
+                        </label>
+                      </div>
                       <span className="text-slate-400 font-bold flex-shrink-0">🔗</span>
-                      <input 
-                        type="text" 
-                        value={pareja.der}
-                        onChange={(e) => {
-                          const nuevas = [...actividades];
-                          nuevas[index].datos.parejas[pIndex].der = e.target.value;
-                          setActividades(nuevas);
-                        }}
-                        placeholder="Lado Der (Ej: Perro o URL Imagen)"
-                        className="w-1/2 p-3 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-green-300"
-                      />
+                      <div className="relative w-1/2">
+                        <input 
+                          type="text" 
+                          value={pareja.der}
+                          onChange={(e) => handleTextChange(e, index, pIndex, 'der')}
+                          placeholder="Lado Der (Texto o URL)"
+                          className="w-full p-3 pr-10 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-green-300"
+                        />
+                        <label className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-slate-400 hover:text-celeste-500 transition-colors" title="Subir imagen">
+                          {subiendoImagen ? <Loader2 size={18} className="animate-spin"/> : <ImagePlus size={18}/>}
+                          <input type="file" accept="image/*" className="hidden" disabled={subiendoImagen} onChange={(e) => manejarSubidaImagen(e, index, pIndex, 'der')} />
+                        </label>
+                      </div>
                       <button onClick={() => {
                         const nuevas = [...actividades];
                         nuevas[index].datos.parejas.splice(pIndex, 1);

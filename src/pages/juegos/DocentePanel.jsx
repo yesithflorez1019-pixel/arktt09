@@ -299,7 +299,7 @@ export default function DocentePanel() {
   };
 
   const renderMedia = (texto) => {
-    if (typeof texto === 'string' && texto.startsWith('http')) {
+    if (typeof texto === 'string' && (texto.startsWith('http') || texto.startsWith('data:image'))) {
       return <img src={texto} alt="media" className="max-h-24 object-contain mx-auto rounded-lg shadow-sm" />;
     }
     return texto;
